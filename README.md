@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Uptown Gaming Website
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This repository contains the Uptown Gaming website built with Next.js, TypeScript, and Tailwind CSS.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The site is intended to be a polished, mobile-first, brand-forward experience that highlights:
+- the Uptown Gaming brand
+- the venue and amenities
+- events and community
+- the booking/inquiry path
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project should be built in a controlled, step-by-step way using the repo documentation as the source of truth.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Stack
 
-## Learn More
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- App Router
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Goal
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Create a focused MVP website that:
+- clearly communicates what Uptown Gaming is
+- presents the brand and venue in a strong way
+- helps users discover events
+- supports booking inquiries
+- stays consistent with the brand system
+- works well on mobile
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Documentation Map
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+These files define how the project should be built:
+
+- `CURSOR_RULES.md`
+- `docs/PRODUCT_BRIEF.md`
+- `docs/MVP_SCOPE.md`
+- `docs/BRAND_RULES.md`
+- `docs/FRONTEND_ARCHITECTURE.md`
+- `docs/ROUTES_AND_PAGE_SPECS.md`
+- `docs/BUILD_SEQUENCE.md`
+- `docs/COMPONENT_SPEC.md`
+- `docs/CONTENT_MODEL.md`
+- `docs/QA_CHECKLIST.md`
+
+Cursor should read these files before making major code changes.
+
+---
+
+## Working Rules
+
+- Build one approved step at a time
+- Do not skip ahead
+- Do not add features outside MVP
+- Do not introduce backend/auth/database unless explicitly approved
+- Reuse existing components whenever possible
+- Keep changes small and reviewable
+- Follow the documented architecture and route specs
+
+---
+
+## MVP Summary
+
+### Core Pages
+- Home
+- Events
+- Book the Space
+- Venue
+- About
+- Contact
+
+### Core Goals
+- strong first impression
+- clear brand presentation
+- event visibility
+- venue/amenities presentation
+- booking path
+- contact path
+- responsive layouts
+- branded consistency
+
+### Out of Scope for MVP
+- auth
+- member portal
+- dashboards
+- custom backend
+- database-driven admin tools
+- custom booking engine
+- advanced automation systems
+
+---
+
+## Suggested Build Flow
+
+Follow `docs/BUILD_SEQUENCE.md`.
+
+Do not start building large pages or features until:
+1. the shell is established
+2. shared config exists
+3. UI primitives exist
+4. route and page specs are understood
+
+---
+
+## Notes
+
+This repo should prioritize clarity, consistency, and controlled scope over speed or unnecessary complexity.
