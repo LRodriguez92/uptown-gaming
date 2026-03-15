@@ -1,8 +1,13 @@
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
+import {
+  footerExploreLinks,
+  footerBookContactLinks,
+} from "@/config/nav";
 
 /**
  * Base footer placeholder. Step 4 will implement full Footer with groups.
- * IA: Brand, Explore (Events, Venue, About), Book/Contact, Social, copyright.
+ * Content from config: brand, Explore, Book/Contact, Social, copyright.
  */
 export function Footer() {
   return (
@@ -14,10 +19,10 @@ export function Footer() {
               href="/"
               className="font-brand-display text-lg font-bold text-(--foreground)"
             >
-              Uptown Gaming
+              {siteConfig.name}
             </Link>
             <p className="mt-2 text-sm text-(--foreground)/80">
-              Community-driven gaming events and venue.
+              {siteConfig.shortDescription}
             </p>
           </div>
           <div>
@@ -25,21 +30,16 @@ export function Footer() {
               Explore
             </h3>
             <ul className="mt-2 flex flex-col gap-1">
-              <li>
-                <Link href="/events" className="text-sm text-(--foreground)/80 hover:underline">
-                  Events
-                </Link>
-              </li>
-              <li>
-                <Link href="/venue" className="text-sm text-(--foreground)/80 hover:underline">
-                  Venue
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-sm text-(--foreground)/80 hover:underline">
-                  About
-                </Link>
-              </li>
+              {footerExploreLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-(--foreground)/80 hover:underline"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>
@@ -47,21 +47,38 @@ export function Footer() {
               Book / Contact
             </h3>
             <ul className="mt-2 flex flex-col gap-1">
+              {footerBookContactLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-(--foreground)/80 hover:underline"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold text-(--foreground)">
+              Social
+            </h3>
+            <ul className="mt-2 flex flex-col gap-1">
               <li>
-                <Link href="/book" className="text-sm text-(--foreground)/80 hover:underline">
-                  Book the Space
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm text-(--foreground)/80 hover:underline">
-                  Contact
-                </Link>
+                <a
+                  href={siteConfig.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-(--foreground)/80 hover:underline"
+                >
+                  Instagram
+                </a>
               </li>
             </ul>
           </div>
         </div>
         <p className="mt-8 text-xs text-(--foreground)/60">
-          © {new Date().getFullYear()} Uptown Gaming. All rights reserved.
+          © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
         </p>
       </div>
     </footer>

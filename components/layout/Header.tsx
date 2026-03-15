@@ -1,8 +1,10 @@
 import Link from "next/link";
+import { siteConfig } from "@/config/site";
+import { mainNavLinks } from "@/config/nav";
 
 /**
  * Base header placeholder. Step 4 will implement full Header with mobile nav.
- * Approved nav: Home, Events, Book the Space, Venue, About, Contact.
+ * Nav and brand come from config.
  */
 export function Header() {
   return (
@@ -11,29 +13,20 @@ export function Header() {
         <Link
           href="/"
           className="font-brand-display text-xl font-bold text-(--foreground)"
-          aria-label="Uptown Gaming home"
+          aria-label={`${siteConfig.name} home`}
         >
-          Uptown Gaming
+          {siteConfig.name}
         </Link>
         <nav aria-label="Main navigation" className="flex flex-wrap gap-6">
-          <Link href="/" className="text-(--foreground) hover:underline">
-            Home
-          </Link>
-          <Link href="/events" className="text-(--foreground) hover:underline">
-            Events
-          </Link>
-          <Link href="/book" className="text-(--foreground) hover:underline">
-            Book the Space
-          </Link>
-          <Link href="/venue" className="text-(--foreground) hover:underline">
-            Venue
-          </Link>
-          <Link href="/about" className="text-(--foreground) hover:underline">
-            About
-          </Link>
-          <Link href="/contact" className="text-(--foreground) hover:underline">
-            Contact
-          </Link>
+          {mainNavLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-(--foreground) hover:underline"
+            >
+              {label}
+            </Link>
+          ))}
         </nav>
       </div>
     </header>

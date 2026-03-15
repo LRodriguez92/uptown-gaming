@@ -1,13 +1,10 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import { qtPalatine, powerr } from "@/lib/fonts";
+import { createPageMetadata } from "@/lib/metadata";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
-export const metadata: Metadata = {
-  title: "Uptown Gaming",
-  description: "Community-driven gaming events, venue experiences, and bookings.",
-};
+export const metadata = createPageMetadata();
 
 export default function RootLayout({
   children,
