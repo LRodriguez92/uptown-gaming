@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { mainNavLinks } from "@/config/nav";
+import { Container } from "@/components/ui/Container";
+import { MobileNav } from "@/components/layout/MobileNav";
 
 /**
- * Base header placeholder. Step 4 will implement full Header with mobile nav.
- * Nav and brand come from config.
+ * Shared header: logo, approved nav (desktop inline, mobile via MobileNav).
+ * Uses Container; mobile-first per Step 4 / COMPONENT_SPEC.
  */
 export function Header() {
   return (
     <header className="border-b border-(--foreground)/10 bg-(--background)">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-4">
+      <Container className="flex flex-wrap items-center justify-between gap-4 py-4">
         <Link
           href="/"
           className="font-brand-display text-xl font-bold text-(--foreground)"
@@ -17,7 +19,10 @@ export function Header() {
         >
           {siteConfig.name}
         </Link>
-        <nav aria-label="Main navigation" className="flex flex-wrap gap-6">
+        <nav
+          aria-label="Main navigation"
+          className="hidden flex-wrap items-center gap-6 md:flex"
+        >
           {mainNavLinks.map(({ href, label }) => (
             <Link
               key={href}
@@ -28,7 +33,8 @@ export function Header() {
             </Link>
           ))}
         </nav>
-      </div>
+        <MobileNav />
+      </Container>
     </header>
   );
 }

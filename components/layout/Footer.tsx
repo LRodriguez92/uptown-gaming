@@ -4,15 +4,16 @@ import {
   footerExploreLinks,
   footerBookContactLinks,
 } from "@/config/nav";
+import { Container } from "@/components/ui/Container";
 
 /**
- * Base footer placeholder. Step 4 will implement full Footer with groups.
- * Content from config: brand, Explore, Book/Contact, Social, copyright.
+ * Shared footer: brand, Explore, Book/Contact, Social, copyright.
+ * Uses Container; content from config. Step 4 layout component.
  */
 export function Footer() {
   return (
     <footer className="border-t border-(--foreground)/10 bg-(--background)">
-      <div className="mx-auto max-w-6xl px-4 py-8">
+      <Container className="py-8">
         <div className="flex flex-wrap gap-8">
           <div>
             <Link
@@ -80,7 +81,7 @@ export function Footer() {
         <p className="mt-8 text-xs text-(--foreground)/60">
           © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
         </p>
-      </div>
+      </Container>
     </footer>
   );
 }
