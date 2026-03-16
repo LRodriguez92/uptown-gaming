@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/config/site";
+import { ContactForm } from "@/components/forms/ContactForm";
 
 export const metadata = createPageMetadata({
   title: "Contact",
@@ -48,9 +49,20 @@ export default function ContactPage() {
                 </a>
               </li>
             </ul>
-            <p className="mt-6 text-sm text-(--foreground)/70">
-              Contact form will be added in Step 9. For now, use the email links above.
-            </p>
+          </div>
+        </Container>
+      </section>
+
+      <section aria-label="Contact form">
+        <Container className="pb-12 md:pb-16">
+          <h2 className="text-lg font-semibold text-(--foreground)">
+            Send an inquiry
+          </h2>
+          <p className="mt-2 text-(--foreground)/80">
+            Use the form below for booking inquiries, event questions, or general outreach.
+          </p>
+          <div className="mt-6">
+            <ContactForm />
           </div>
         </Container>
       </section>
