@@ -25,7 +25,7 @@ export default function ContactPage() {
 
       <section aria-label="Contact details">
         <Container className="pb-12 md:pb-16">
-          <div className="rounded-lg border border-(--foreground)/10 bg-(--foreground)/5 p-6">
+          <div className="rounded-lg border border-(--foreground)/15 bg-(--surface-dark) p-6">
             <h2 className="text-lg font-semibold text-(--foreground)">
               Get in touch
             </h2>

@@ -26,29 +26,31 @@ export default function EventsPage() {
 
       <section aria-label="Event list">
         <Container className="pb-12 md:pb-16">
-          <ul className="grid gap-6 sm:grid-cols-2">
-            {events.map((event) => (
-              <li key={event.slug}>
-                <Card className="h-full">
-                  <p className="text-sm font-medium text-(--foreground)/70">
-                    {event.date}
-                    {event.time ? ` · ${event.time}` : ""}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold text-(--foreground)">
-                    {event.title}
-                  </h3>
-                  <p className="mt-2 text-(--foreground)/80">{event.shortDescription}</p>
-                </Card>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button as="link" href="/book" variant="secondary">
-              Book the Space
-            </Button>
-            <Button as="link" href="/contact" variant="ghost">
-              Contact us
-            </Button>
+          <div className="rounded-lg bg-(--surface-dark) border border-(--foreground)/15 p-6 md:p-8">
+            <ul className="grid gap-6 sm:grid-cols-2">
+              {events.map((event) => (
+                <li key={event.slug}>
+                  <Card className="h-full">
+                    <p className="text-sm font-medium text-(--foreground)/70">
+                      {event.date}
+                      {event.time ? ` · ${event.time}` : ""}
+                    </p>
+                    <h3 className="mt-2 text-lg font-semibold text-(--foreground)">
+                      {event.title}
+                    </h3>
+                    <p className="mt-2 text-(--foreground)/80">{event.shortDescription}</p>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button as="link" href="/book" variant="secondary">
+                Book the Space
+              </Button>
+              <Button as="link" href="/contact" variant="ghost">
+                Contact us
+              </Button>
+            </div>
           </div>
         </Container>
       </section>

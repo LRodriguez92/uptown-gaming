@@ -1,22 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f2f2f2;
-  --foreground: #191919;
+  --background: #050505;
+  --foreground: #f2f2f2;
   --brand-primary: #188933;
   --brand-accent: #f2ab00;
-  --surface-dark: #000000;
-  --surface-light: #f2f2f2;
+  --surface-dark: #111111;
+  --surface-light: #181818;
 }
 
 html {
-  background: var(--background);
-  color: var(--foreground);
+  /* Ensure our dark theme wins over Tailwind preflight */
+  background: var(--background) !important;
+  color: var(--foreground) !important;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--background) !important;
+  color: var(--foreground) !important;
   font-family: var(--font-body), Georgia, "Times New Roman", serif;
 }
 

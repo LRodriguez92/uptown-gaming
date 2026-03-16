@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/config/site";
 import { mainNavLinks } from "@/config/nav";
 import { Container } from "@/components/ui/Container";
@@ -10,14 +11,23 @@ import { MobileNav } from "@/components/layout/MobileNav";
  */
 export function Header() {
   return (
-    <header className="border-b border-(--foreground)/10 bg-(--background)">
+    <header className="border-b border-(--foreground)/15 bg-(--surface-dark)">
       <Container className="flex flex-wrap items-center justify-between gap-4 py-4">
         <Link
           href="/"
-          className="font-brand-display text-xl font-bold text-(--foreground)"
+          className="flex items-center gap-3"
           aria-label={`${siteConfig.name} home`}
         >
-          {siteConfig.name}
+          <Image
+            src="/logos/UG_Logomark_Green.png"
+            alt={siteConfig.name}
+            width={32}
+            height={32}
+            priority
+          />
+          <span className="font-brand-display text-lg font-bold text-(--foreground)">
+            {siteConfig.name}
+          </span>
         </Link>
         <nav
           aria-label="Main navigation"

@@ -29,20 +29,22 @@ export default function VenuePage() {
 
       <section aria-label="Venue features">
         <Container className="pb-12 md:pb-16">
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {sorted.map((feature) => (
-              <li key={feature.slug}>
-                <Card className="h-full">
-                  <h3 className="text-lg font-semibold text-(--foreground)">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-2 text-(--foreground)/80">
-                    {feature.shortDescription}
-                  </p>
-                </Card>
-              </li>
-            ))}
-          </ul>
+          <div className="rounded-lg bg-(--surface-dark) border border-(--foreground)/15 p-6 md:p-8">
+            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {sorted.map((feature) => (
+                <li key={feature.slug}>
+                  <Card className="h-full">
+                    <h3 className="text-lg font-semibold text-(--foreground)">
+                      {feature.title}
+                    </h3>
+                    <p className="mt-2 text-(--foreground)/80">
+                      {feature.shortDescription}
+                    </p>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+          </div>
         </Container>
       </section>
 
