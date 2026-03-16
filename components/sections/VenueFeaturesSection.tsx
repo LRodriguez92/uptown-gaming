@@ -2,38 +2,26 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-
-/** Inline venue features. Step 8 will replace with content from content/venue-features. */
-const venueFeatures = [
-  {
-    title: "Flexible Layout",
-    shortDescription: "Configurable setup for tournaments, meetups, and private events. Tables, screens, and seating to match your needs.",
-  },
-  {
-    title: "Gaming-Ready",
-    shortDescription: "Built for competitive and casual play. Reliable tech and space designed for community gaming.",
-  },
-  {
-    title: "Central Location",
-    shortDescription: "Easy to find and reach. A dedicated space for your group or brand activation.",
-  },
-];
+import { venueFeatures } from "@/content/venue-features";
 
 /**
  * Venue features: highlight venue value, support booking path.
- * CONTENT_GUIDE: feature titles clear, short benefit-focused descriptions. Step 8 wires content.
+ * Uses content/venue-features. CONTENT_GUIDE: clear titles, short benefit-focused descriptions.
  */
 export function VenueFeaturesSection() {
+  const sorted = [...venueFeatures].sort(
+    (a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)
+  );
   return (
     <section aria-label="Venue features">
       <Container className="py-12 md:py-16">
         <SectionHeading
           title="The Space"
-          support="A venue that works for organizers and communities. Here’s what makes it worth booking."
+          support="A venue that works for organizers and communities. Here's what makes it worth booking."
         />
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {venueFeatures.map((feature) => (
-            <li key={feature.title}>
+          {sorted.map((feature) => (
+            <li key={feature.slug}>
               <Card className="h-full">
                 <h3 className="text-lg font-semibold text-(--foreground)">
                   {feature.title}

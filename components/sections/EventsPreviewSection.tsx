@@ -3,38 +3,24 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-
-/** Inline event preview data. Step 8 will replace with content from content/events. */
-const previewEvents = [
-  {
-    title: "Weekly Open Play",
-    date: "Every Friday",
-    time: "6–10 PM",
-    shortDescription: "Drop-in gaming and community hangout. All skill levels welcome.",
-  },
-  {
-    title: "Monthly Tournament",
-    date: "First Saturday",
-    time: "12 PM",
-    shortDescription: "Competitive brackets and casual side events. Prizes and bragging rights.",
-  },
-];
+import { getEventsForPreview } from "@/content/events";
 
 /**
  * Events preview: surface featured/upcoming events, link to Events page.
- * CONTENT_GUIDE: short event previews, scanning easy, view more obvious. Step 8 wires content.
+ * Uses content/events (getEventsForPreview). CONTENT_GUIDE: short previews, view more obvious.
  */
 export function EventsPreviewSection() {
+  const previewEvents = getEventsForPreview(2);
   return (
     <section aria-label="Events preview">
       <Container className="py-12 md:py-16">
         <SectionHeading
           title="Upcoming Events"
-          support="See what’s on at Uptown Gaming. Tournaments, meetups, and community nights."
+          support="See what's on at Uptown Gaming. Tournaments, meetups, and community nights."
         />
         <ul className="mt-8 grid gap-6 sm:grid-cols-2">
           {previewEvents.map((event) => (
-            <li key={event.title}>
+            <li key={event.slug}>
               <Card className="h-full">
                 <p className="text-sm font-medium text-(--foreground)/70">
                   {event.date}

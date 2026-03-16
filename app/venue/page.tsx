@@ -3,6 +3,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { createPageMetadata } from "@/lib/metadata";
+import { venueFeatures } from "@/content/venue-features";
 
 export const metadata = createPageMetadata({
   title: "Venue",
@@ -10,14 +11,10 @@ export const metadata = createPageMetadata({
   path: "/venue",
 });
 
-/** Starter venue features. Step 8 will replace with content from content/venue-features. */
-const features = [
-  { title: "Flexible Layout", shortDescription: "Configurable setup for tournaments, meetups, and private events." },
-  { title: "Gaming-Ready", shortDescription: "Built for competitive and casual play with reliable tech." },
-  { title: "Central Location", shortDescription: "Easy to find and reach for your group or activation." },
-];
-
 export default function VenuePage() {
+  const sorted = [...venueFeatures].sort(
+    (a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)
+  );
   return (
     <>
       <section aria-label="Venue intro">
@@ -33,8 +30,8 @@ export default function VenuePage() {
       <section aria-label="Venue features">
         <Container className="pb-12 md:pb-16">
           <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
-              <li key={feature.title}>
+            {sorted.map((feature) => (
+              <li key={feature.slug}>
                 <Card className="h-full">
                   <h3 className="text-lg font-semibold text-(--foreground)">
                     {feature.title}

@@ -3,18 +3,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { createPageMetadata } from "@/lib/metadata";
+import { events } from "@/content/events";
 
 export const metadata = createPageMetadata({
   title: "Events",
   description: "Upcoming events at Uptown Gaming. Tournaments, meetups, and community nights.",
   path: "/events",
 });
-
-/** Starter event list. Step 8 will replace with content from content/events. */
-const events = [
-  { title: "Weekly Open Play", date: "Every Friday", time: "6–10 PM", shortDescription: "Drop-in gaming and community hangout." },
-  { title: "Monthly Tournament", date: "First Saturday", time: "12 PM", shortDescription: "Competitive brackets and casual side events." },
-];
 
 export default function EventsPage() {
   return (
@@ -33,7 +28,7 @@ export default function EventsPage() {
         <Container className="pb-12 md:pb-16">
           <ul className="grid gap-6 sm:grid-cols-2">
             {events.map((event) => (
-              <li key={event.title}>
+              <li key={event.slug}>
                 <Card className="h-full">
                   <p className="text-sm font-medium text-(--foreground)/70">
                     {event.date}
