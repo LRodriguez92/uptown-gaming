@@ -9,15 +9,15 @@
   --surface-light: #181818;
 }
 
-html {
-  /* Ensure our dark theme wins over Tailwind preflight */
-  background: var(--background) !important;
+html,
+body,
+:root {
+  /* Force dark theme regardless of Tailwind preflight or other global styles */
+  background-color: var(--background) !important;
   color: var(--foreground) !important;
 }
 
 body {
-  background: var(--background) !important;
-  color: var(--foreground) !important;
   font-family: var(--font-body), Georgia, "Times New Roman", serif;
 }
 
