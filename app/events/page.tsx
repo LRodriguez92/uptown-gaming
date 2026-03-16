@@ -1,8 +1,62 @@
+import { Container } from "@/components/ui/Container";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata = createPageMetadata({
+  title: "Events",
+  description: "Upcoming events at Uptown Gaming. Tournaments, meetups, and community nights.",
+  path: "/events",
+});
+
+/** Starter event list. Step 8 will replace with content from content/events. */
+const events = [
+  { title: "Weekly Open Play", date: "Every Friday", time: "6–10 PM", shortDescription: "Drop-in gaming and community hangout." },
+  { title: "Monthly Tournament", date: "First Saturday", time: "12 PM", shortDescription: "Competitive brackets and casual side events." },
+];
+
 export default function EventsPage() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
-      <h1 className="text-2xl font-bold text-(--foreground)">Events</h1>
-      <p className="mt-4 text-(--foreground)/80">Placeholder. Step 7 will add content.</p>
-    </div>
+    <>
+      <section aria-label="Events intro">
+        <Container className="py-12 md:py-16">
+          <SectionHeading
+            as="h1"
+            title="Upcoming Events"
+            support="See what’s on at Uptown Gaming. Tournaments, meetups, and open play."
+          />
+        </Container>
+      </section>
+
+      <section aria-label="Event list">
+        <Container className="pb-12 md:pb-16">
+          <ul className="grid gap-6 sm:grid-cols-2">
+            {events.map((event) => (
+              <li key={event.title}>
+                <Card className="h-full">
+                  <p className="text-sm font-medium text-(--foreground)/70">
+                    {event.date}
+                    {event.time ? ` · ${event.time}` : ""}
+                  </p>
+                  <h3 className="mt-2 text-lg font-semibold text-(--foreground)">
+                    {event.title}
+                  </h3>
+                  <p className="mt-2 text-(--foreground)/80">{event.shortDescription}</p>
+                </Card>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Button as="link" href="/book" variant="secondary">
+              Book the Space
+            </Button>
+            <Button as="link" href="/contact" variant="ghost">
+              Contact us
+            </Button>
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }
