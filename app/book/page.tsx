@@ -40,7 +40,7 @@ export default function BookPage() {
         <Container className="pb-12 md:pb-16">
           <SectionHeading
             title="What You Get"
-            support="Flexible layout, gaming-ready setup, and a central location. Step 8 will add venue features; Step 9 will add inquiry form or workflow."
+            support="Flexible layout, gaming-ready setup, and a central location—everything you need to run a great event."
           />
         </Container>
       </section>
