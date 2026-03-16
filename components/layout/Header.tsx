@@ -19,15 +19,13 @@ export function Header() {
           aria-label={`${siteConfig.name} home`}
         >
           <Image
-            src="/logos/UG_Logomark_Green.png"
+            src="/logos/UG_FullLogo_Green.png"
             alt={siteConfig.name}
-            width={32}
-            height={32}
+            width={160}
+            height={36}
             priority
+            className="mt-[-2px]"
           />
-          <span className="font-brand-display text-lg font-bold text-(--foreground)">
-            {siteConfig.name}
-          </span>
         </Link>
         <nav
           aria-label="Main navigation"
