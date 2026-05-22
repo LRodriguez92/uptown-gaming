@@ -27,7 +27,7 @@ Use this file to:
 | Menu | `/menu` (`public/menu/*.png`, sorted by filename) | Main nav **Menu** link (same tab) |
 | GoFundMe | Subdued support link | `SupportSection` on homepage + footer; toggle `fundraising.showSupportLink` |
 | SMS program | Text JOIN + legal copy + QR image | `SmsProgramSection` on homepage, `siteConfig.sms` |
-| Events / venue content | Local TS | `content/events.ts`, `content/venue-features.ts` |
+| Events / venue content | Local TS + start.gg API | `/events` — current **Up The Block** tournament + bracket events; `STARTGG_*` env; 5m revalidate |
 
 ---
 
@@ -79,7 +79,7 @@ The website complements Linktree; it does not replace it. The Monday URL on Link
 | Tool | URL | Site treatment |
 |------|-----|----------------|
 | Discord | `https://discord.com/invite/UGNY` | Footer |
-| start.gg hub | `https://www.start.gg/hub/up-the-block-ugny` | Footer, community grid, CTA on `/events` |
+| start.gg hub | `https://www.start.gg/hub/up-the-block-ugny` | Footer; `/events` lists bracket events for current tournament via API |
 | JoinIt membership | `https://app.joinit.com/o/ugny` | Footer, `MembershipSection` on homepage |
 | Food & drink menu | `/menu` → `public/menu/*.png` | Main nav **Menu**; PNGs sorted by name |
 | GoFundMe | [Help Uptown Gaming Rebuild](https://www.gofundme.com/f/help-uptown-gaming-reopen) | Homepage `SupportSection` + footer; reopened 2/6/26, fundraising through Feb 2026 |

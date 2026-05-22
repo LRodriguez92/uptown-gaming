@@ -5,7 +5,9 @@ import { BookingCTASection } from "@/components/sections/BookingCTASection";
 import { MemberPerksSmsSection } from "@/components/sections/MemberPerksSmsSection";
 import { SupportSection } from "@/components/sections/SupportSection";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
   return (
     <>
       <HeroSection />
