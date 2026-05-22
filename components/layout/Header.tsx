@@ -14,7 +14,7 @@ export function Header() {
   const ctaLinks = mainNavLinks.filter((item) => item.cta);
 
   return (
-    <header className="border-b border-(--foreground)/15 bg-(--surface-dark)">
+    <header className="sticky top-0 z-50 border-b border-(--foreground)/15 bg-(--surface-dark)">
       <Container className="flex min-h-16 items-center justify-between gap-4 py-4 md:min-h-[4.5rem] md:py-5">
         <Link
           href="/"
