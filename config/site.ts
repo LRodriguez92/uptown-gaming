@@ -48,7 +48,7 @@ export const siteConfig = {
     confirmKeyword: "YES",
     termsUrl: "https://pos.toasttab.com/terms-of-service",
     privacyUrl: "https://pos.toasttab.com/privacy",
-    flyerImagePath: "/images/sms-flyer.png",
+    qrImagePath: "/images/sms-qr.png",
   },
 
   membership: {

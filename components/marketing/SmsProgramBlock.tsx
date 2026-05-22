@@ -45,11 +45,11 @@ export function SmsProgramBlock({
       >
         <div className="shrink-0">
           <Image
-            src={sms.flyerImagePath}
+            src={sms.qrImagePath}
             alt="QR code to join Uptown Gaming SMS program"
-            width={160}
-            height={160}
-            className="rounded-md border border-(--foreground)/10 bg-white"
+            width={180}
+            height={180}
+            className="rounded-md bg-white p-1"
           />
         </div>
         <div>

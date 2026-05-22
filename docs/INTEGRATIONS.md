@@ -25,7 +25,7 @@ Use this file to:
 | Social | Instagram, TikTok, X, Facebook, Twitch | `siteConfig.social`, footer, contact |
 | Community | Discord, start.gg, JoinIt, menu (Drive) | `siteConfig.community`, footer, contact |
 | GoFundMe | Subdued support link | `SupportSection` on homepage + footer; toggle `fundraising.showSupportLink` |
-| SMS program | Text JOIN + legal copy + flyer QR | `SmsProgramSection` on homepage, `siteConfig.sms` |
+| SMS program | Text JOIN + legal copy + QR image | `SmsProgramSection` on homepage, `siteConfig.sms` |
 | Events / venue content | Local TS | `content/events.ts`, `content/venue-features.ts` |
 | Menu | Google Drive PDF (v1) | `siteConfig.community.menuUrl` — new tab; dynamic updates without redeploy |
 
@@ -92,7 +92,7 @@ The website complements Linktree; it does not replace it. The Monday URL on Link
 |------|--------|
 | Offer | 10% off next order — secret discounts, menu specials, news |
 | Join | Text **JOIN** to **1-833-341-1659**; confirm **YES** |
-| Flyer asset | `/public/images/sms-flyer.png` |
+| QR asset | `/public/images/sms-qr.png` |
 | Legal | Toast terms + privacy linked in `SmsProgramBlock`; STOP/HELP disclosed |
 
 No SMS API on the site — opt-in happens on the user’s phone.
@@ -142,7 +142,7 @@ booking.mondayFormUrl
 funnel.linktreeUrl
 social.{instagram,tiktok,x,facebook,twitch}
 community.{discord,startGgHub,membershipUrl,gofundmeUrl,gofundmeTitle,menuUrl}
-sms.{keyword,phoneDisplay,smsUri,confirmKeyword,termsUrl,privacyUrl,flyerImagePath}
+sms.{keyword,phoneDisplay,smsUri,confirmKeyword,termsUrl,privacyUrl,qrImagePath}
 membership.{priceLabel,benefits}
 fundraising.{showSupportLink,supportBlurb}
 ```
