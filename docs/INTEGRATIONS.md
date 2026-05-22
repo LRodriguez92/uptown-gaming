@@ -82,7 +82,7 @@ The website complements Linktree; it does not replace it. The Monday URL on Link
 | start.gg hub | `https://www.start.gg/hub/up-the-block-ugny` | Footer; `/events` lists bracket events for current tournament via API |
 | JoinIt membership | `https://app.joinit.com/o/ugny` | Footer, `MembershipSection` on homepage |
 | Food & drink menu | `/menu` → `public/menu/*.png` | Main nav **Menu**; PNGs sorted by name |
-| GoFundMe | [Help Uptown Gaming Rebuild](https://www.gofundme.com/f/help-uptown-gaming-reopen) | Homepage `SupportSection` + footer; reopened 2/6/26, fundraising through Feb 2026 |
+| GoFundMe | [Help Uptown Gaming Rebuild](https://www.gofundme.com/f/help-uptown-gaming-reopen) | Homepage `SupportSection` + footer; copy in `fundraising.supportBlurb` |
 
 **Membership benefits** (JoinIt, $35/month): `siteConfig.membership.benefits`, homepage `MembershipSection`.
 
@@ -172,7 +172,7 @@ Exported helpers: `bookingFormUrl`, `socialLinks`, `communityLinks`.
 | Item | Action |
 |------|--------|
 | Linktree ↔ Monday parity | Client keeps both URLs aligned on Linktree |
-| GoFundMe after February 2026 | Set `fundraising.showSupportLink` to `false` |
+| GoFundMe campaign ends | Set `fundraising.showSupportLink` to `false` |
 | Menu on-site PDFs | Only if client wants hosted copies later |
 | Site analytics | Phase 1.1 — optional |
 

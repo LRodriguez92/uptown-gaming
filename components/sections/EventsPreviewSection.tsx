@@ -84,7 +84,7 @@ export async function EventsPreviewSection() {
             as="link"
             href={tournament?.href ?? siteConfig.community.startGgHub}
             external
-            variant="ghost"
+            variant="secondary"
             className="max-sm:flex-1 max-sm:px-3 max-sm:text-sm"
           >
             View on start.gg

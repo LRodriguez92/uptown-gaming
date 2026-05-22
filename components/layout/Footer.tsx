@@ -9,9 +9,30 @@ import { NavLink } from "@/components/layout/NavLink";
 import { Container } from "@/components/ui/Container";
 import { SocialIcon } from "@/components/icons/SocialIcon";
 import { externalLinkClassName, internalLinkClassName } from "@/lib/links";
+import { cn } from "@/lib/utils";
 
 const socialIconLinkClassName =
   "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-(--foreground)/80 transition-colors hover:bg-(--foreground)/10 hover:text-(--foreground) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2";
+
+function FooterSocialIcons({ className }: { className?: string }) {
+  return (
+    <ul className={cn("flex flex-nowrap items-center gap-1", className)}>
+      {socialLinks.map(({ href, label, platform }) => (
+        <li key={href}>
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={label}
+            className={socialIconLinkClassName}
+          >
+            <SocialIcon platform={platform} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function Footer() {
   const { fundraising, community } = siteConfig;
@@ -30,6 +51,7 @@ export function Footer() {
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-(--foreground)/80">
               {siteConfig.shortDescription}
             </p>
+            <FooterSocialIcons className="mt-4 hidden lg:flex" />
           </div>
 
           <div>
@@ -100,26 +122,9 @@ export function Footer() {
               </ul>
             </div>
           )}
-
-          <div>
-            <h3 className="text-sm font-semibold text-(--foreground)">Social</h3>
-            <ul className="mt-3 flex flex-nowrap items-center gap-1">
-              {socialLinks.map(({ href, label, platform }) => (
-                <li key={href}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className={socialIconLinkClassName}
-                  >
-                    <SocialIcon platform={platform} />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
+
+        <FooterSocialIcons className="mt-8 lg:hidden" />
 
         <p className="mt-10 border-t border-(--foreground)/10 pt-6 text-xs text-(--foreground)/60">
           © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.

@@ -73,7 +73,7 @@ export const siteConfig = {
     /** Hide GoFundMe links in UI when set false (e.g. after campaign ends). */
     showSupportLink: true,
     supportBlurb:
-      "We reopened February 6, 2026. Thank you for the support that got us there. We’re still fundraising through February to restock, organize, and start strong in spring.",
+      "We reopened February 6, 2026—thank you for helping us get there. Our GoFundMe is still open if you’d like to support restocking, organizing the space, and keeping events running this season.",
   },
 } as const;
 

@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 import type { NavItem } from "@/config/nav";
 
 const navCtaClassName =
-  "inline-flex min-h-[40px] items-center justify-center rounded-md bg-(--brand-primary) px-4 py-2 text-sm font-medium text-(--surface-light) transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2";
+  "inline-flex min-h-[40px] items-center justify-center rounded-md bg-(--brand-primary) px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2";
 
 const mobileNavCtaClassName =
-  "min-h-[44px] w-full justify-center rounded-md bg-(--brand-primary) px-4 py-3 text-lg font-medium text-(--surface-light) hover:opacity-90 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2";
+  "min-h-[44px] w-full justify-center rounded-md bg-(--brand-primary) px-4 py-3 text-lg font-medium text-white hover:opacity-90 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2";
 
 type NavLinkProps = {
   item: NavItem;
