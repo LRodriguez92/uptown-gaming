@@ -100,10 +100,10 @@ Surface the conflict clearly.
 Approved MVP routes:
 - `/`
 - `/events`
-- `/book`
 - `/venue`
 - `/about`
-- `/contact`
+
+Booking uses the Monday.com form URL from config (same tab). Contact is `contact@uptowngaming.net` via mailto links.
 
 Do not add additional top-level routes unless they are explicitly approved.
 

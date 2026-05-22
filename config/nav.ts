@@ -1,21 +1,30 @@
+import { bookingFormUrl, siteConfig } from "@/config/site";
+
 /**
  * Navigation and footer link configuration. Matches approved MVP routes and IA.
- * Single source of truth for header nav and footer link groups.
  */
 
 export type NavItem = {
   href: string;
   label: string;
+  /** When true, open in a new tab. Omit or false for same-tab (including external URLs). */
+  external?: boolean;
+  /** Green primary CTA styling (header / mobile nav). */
+  cta?: boolean;
 };
 
-/** Main nav order per IA: Home, Events, Book the Space, Venue, About, Contact. */
+/** Main nav — Book the Space is last as a CTA (Monday form, same tab). */
 export const mainNavLinks: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/events", label: "Events" },
-  { href: "/book", label: "Book the Space" },
   { href: "/venue", label: "Venue" },
+  { href: siteConfig.community.menuUrl, label: "Menu" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  {
+    href: bookingFormUrl,
+    label: "Book the Space",
+    cta: true,
+  },
 ];
 
 /** Footer "Explore" group: Events, Venue, About. */
@@ -25,8 +34,8 @@ export const footerExploreLinks: NavItem[] = [
   { href: "/about", label: "About" },
 ];
 
-/** Footer "Book / Contact" group. */
-export const footerBookContactLinks: NavItem[] = [
-  { href: "/book", label: "Book the Space" },
-  { href: "/contact", label: "Contact" },
+/** Footer booking and email. */
+export const footerBookingLinks: NavItem[] = [
+  { href: bookingFormUrl, label: "Book the Space" },
+  { href: `mailto:${siteConfig.contact.email}`, label: siteConfig.contact.email },
 ];

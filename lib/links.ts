@@ -9,5 +9,11 @@ export function isExternalHref(href: string): boolean {
   );
 }
 
-export const externalLinkClassName =
-  "rounded-sm text-sm text-(--foreground)/80 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2";
+export const linkClassName =
+  "rounded-sm text-sm text-(--foreground)/80 hover:text-(--foreground) hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2";
+
+/** Internal site links (footer nav, etc.) */
+export const internalLinkClassName = linkClassName;
+
+/** External / outbound links */
+export const externalLinkClassName = linkClassName;

@@ -1,6 +1,10 @@
 import { Container } from "@/components/ui/Container";
+import { Panel } from "@/components/ui/Panel";
+import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageIntro } from "@/components/layout/PageIntro";
 import { Button } from "@/components/ui/Button";
+import { bookingFormUrl, siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -12,49 +16,40 @@ export const metadata = createPageMetadata({
 export default function AboutPage() {
   return (
     <>
-      <section aria-label="About intro">
-        <Container className="py-12 md:py-16">
-          <SectionHeading
-            as="h1"
-            title="Who We Are"
-            support="Uptown Gaming is a community-centered space for gaming events, meetups, and bookings. We exist to bring players and organizers together."
-          />
-        </Container>
-      </section>
+      <PageIntro
+        title="Who We Are"
+        support="Uptown Gaming is a community-centered space for gaming events, meetups, and bookings. We exist to bring players and organizers together."
+      />
 
-      <section aria-label="Brand story">
-        <Container className="pb-12 md:pb-16">
-          <SectionHeading
-            title="Our Story"
-            support="We built a venue where local communities can run tournaments, casual nights, and branded experiences. The space is designed to be flexible, welcoming, and ready for whatever you have in mind."
-          />
+      <Section aria-label="About content">
+        <Container>
+          <Panel className="space-y-10 md:space-y-12">
+            <SectionHeading
+              title="Our Story"
+              support="We built a venue where local communities can run tournaments, casual nights, and branded experiences. The space is designed to be flexible, welcoming, and ready for whatever you have in mind."
+            />
+            <SectionHeading
+              title="Community First"
+              support="We believe in events that connect people. Whether you're here to compete, hang out, or host your own thing—you're in the right place."
+            />
+            <div className="flex flex-wrap gap-4 border-t border-(--foreground)/10 pt-8">
+              <Button as="link" href="/events">
+                View Events
+              </Button>
+              <Button as="link" href={bookingFormUrl} variant="secondary">
+                Book the Space
+              </Button>
+              <Button
+                as="link"
+                href={`mailto:${siteConfig.contact.email}`}
+                variant="ghost"
+              >
+                Email us
+              </Button>
+            </div>
+          </Panel>
         </Container>
-      </section>
-
-      <section aria-label="Community values">
-        <Container className="pb-12 md:pb-16">
-          <SectionHeading
-            title="Community First"
-            support="We believe in events that connect people. Whether you’re here to compete, hang out, or host your own thing—you’re in the right place."
-          />
-        </Container>
-      </section>
-
-      <section aria-label="CTAs">
-        <Container className="pb-12 md:pb-16">
-          <div className="flex flex-wrap gap-4">
-            <Button as="link" href="/events">
-              View Events
-            </Button>
-            <Button as="link" href="/book" variant="secondary">
-              Book the Space
-            </Button>
-            <Button as="link" href="/contact" variant="ghost">
-              Contact
-            </Button>
-          </div>
-        </Container>
-      </section>
+      </Section>
     </>
   );
 }

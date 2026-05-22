@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { bookingFormUrl } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 
 /**
@@ -26,8 +27,8 @@ export function HeroSection() {
           <source src="/media/ug-hero-720.webm" type="video/webm" />
         </video>
         <div className="relative">
-          <Container className="py-16 md:py-24">
-            <div className="flex flex-col items-center gap-6 hero-content hero-text-shadow">
+          <Container className="py-16 md:py-24 lg:py-28">
+            <div className="flex flex-col items-center gap-8 hero-content hero-text-shadow">
               <Image
                 src="/logos/UG_Logomark_White.png"
                 alt="Uptown Gaming logomark"
@@ -42,8 +43,8 @@ export function HeroSection() {
                 align="center"
               />
             </div>
-            <div className="mt-8 flex flex-wrap justify-center gap-4 hero-content">
-              <Button as="link" href="/book" className="hero-button-shadow">
+            <div className="mt-10 flex flex-wrap justify-center gap-4 hero-content">
+              <Button as="link" href={bookingFormUrl} className="hero-button-shadow">
                 Book the Space
               </Button>
               <Button as="link" href="/events" variant="secondary">

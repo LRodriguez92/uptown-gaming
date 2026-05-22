@@ -1,18 +1,19 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { mainNavLinks } from "@/config/nav";
+import { NavLink } from "@/components/layout/NavLink";
 import { cn } from "@/lib/utils";
 
 const panelId = "mobile-nav-panel";
 
-/**
- * Mobile navigation: hamburger trigger and full-width panel with approved nav links.
- * Large tap targets, simple open/close. Hidden on md+ (desktop uses inline nav).
- */
+const mobileNavLinkClassName =
+  "min-h-[44px] flex items-center rounded-md px-4 py-3 text-lg font-medium text-(--foreground) hover:bg-(--foreground)/5 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2";
+
 export function MobileNav() {
   const [open, setOpen] = useState(false);
+  const standardLinks = mainNavLinks.filter((item) => !item.cta);
+  const ctaLinks = mainNavLinks.filter((item) => item.cta);
 
   const close = useCallback(() => setOpen(false), []);
 
@@ -72,16 +73,24 @@ export function MobileNav() {
         )}
       >
         <nav className="flex flex-col gap-1 p-4" aria-label="Main navigation">
-          {mainNavLinks.map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
+          {standardLinks.map((item) => (
+            <NavLink
+              key={item.href}
+              item={item}
               onClick={close}
-              className="min-h-[44px] flex items-center rounded-md px-4 py-3 text-lg font-medium text-(--foreground) hover:bg-(--foreground)/5 focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2"
-            >
-              {label}
-            </Link>
+              className={mobileNavLinkClassName}
+            />
           ))}
+          <div className="mt-4 border-t border-(--foreground)/10 pt-4">
+            {ctaLinks.map((item) => (
+              <NavLink
+                key={item.href}
+                item={item}
+                onClick={close}
+                mobile
+              />
+            ))}
+          </div>
         </nav>
       </div>
     </>

@@ -31,7 +31,7 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "space-y-2",
+        "space-y-3",
         align === "center" && "text-center",
         className
       )}
@@ -52,7 +52,7 @@ export function SectionHeading({
       {support && (
         <p
           className={cn(
-            "max-w-2xl text-(--foreground)/80 md:text-lg",
+            "max-w-2xl text-base leading-relaxed text-(--foreground)/80 md:text-lg",
             align === "center" && "mx-auto"
           )}
         >

@@ -1,25 +1,22 @@
 import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { venueFeatures } from "@/content/venue-features";
 
-/**
- * Venue features: highlight venue value, support booking path.
- * Uses content/venue-features. CONTENT_GUIDE: clear titles, short benefit-focused descriptions.
- */
 export function VenueFeaturesSection() {
   const sorted = [...venueFeatures].sort(
     (a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0)
   );
   return (
-    <section aria-label="Venue features">
-      <Container className="py-12 md:py-16">
+    <Section aria-label="Venue features" tone="muted">
+      <Container>
         <SectionHeading
           title="The Space"
           support="A venue that works for organizers and communities. Here's what makes it worth booking."
         />
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="section-stack-lg grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {sorted.map((feature) => (
             <li key={feature.slug}>
               <Card className="h-full">
@@ -33,12 +30,12 @@ export function VenueFeaturesSection() {
             </li>
           ))}
         </ul>
-        <div className="mt-8">
+        <div className="section-stack">
           <Button as="link" href="/venue" variant="secondary">
             Explore the venue
           </Button>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

@@ -19,15 +19,15 @@ Use this file to:
 | Capability | Status | Where |
 |------------|--------|--------|
 | Domain / metadata | `https://www.uptowngaming.net` | `siteConfig.baseUrl`, `NEXT_PUBLIC_SITE_URL` |
-| General contact | `contact@uptowngaming.net` | `siteConfig.contact.email`, `/contact` mailto link |
-| Booking | Monday.com public form | `/book` → server `redirect()` → `siteConfig.booking.mondayFormUrl` (same tab) |
-| Linktree | Primary off-site funnel | `siteConfig.funnel.linktreeUrl` — footer + contact |
-| Social | Instagram, TikTok, X, Facebook, Twitch | `siteConfig.social`, footer, contact |
-| Community | Discord, start.gg, JoinIt, menu (Drive) | `siteConfig.community`, footer, contact |
+| General contact | `contact@uptowngaming.net` | `siteConfig.contact.email`, footer + page mailto links |
+| Booking | Monday.com public form | Direct link `bookingFormUrl` (same tab); nav CTA + in-page buttons |
+| Linktree | Primary off-site funnel | `siteConfig.funnel.linktreeUrl` — footer community |
+| Social | Instagram, TikTok, X, Facebook, Twitch | `siteConfig.social`, footer |
+| Community | Discord, start.gg, JoinIt | `siteConfig.community`, footer |
+| Menu | Google Drive PDF | Main nav **Menu** link (same tab) |
 | GoFundMe | Subdued support link | `SupportSection` on homepage + footer; toggle `fundraising.showSupportLink` |
 | SMS program | Text JOIN + legal copy + QR image | `SmsProgramSection` on homepage, `siteConfig.sms` |
 | Events / venue content | Local TS | `content/events.ts`, `content/venue-features.ts` |
-| Menu | Google Drive PDF (v1) | `siteConfig.community.menuUrl` — new tab; dynamic updates without redeploy |
 
 ---
 
@@ -48,12 +48,12 @@ Production: set `NEXT_PUBLIC_SITE_URL=https://www.uptowngaming.net`.
 |------|--------|
 | Role | **Official booking path** |
 | Public form | `https://forms.monday.com/forms/bee8248285b6703275f57a30ea76c9bc?r=use1` |
-| On-site route | `/book` redirects to the form above (**same tab**, no iframe) |
+| On-site | Direct link to Monday form (**same tab**, no iframe). No `/book` or `/contact` routes. |
 
-- Nav and CTAs labeled “Book the Space” use `/book`; redirect performs handoff.
-- “Start booking inquiry” (homepage booking section) uses `/book`.
+- Nav **Book the Space** is last, styled as a green CTA → `bookingFormUrl`.
+- All in-page “Book the Space” buttons link to `bookingFormUrl` directly.
 - **Do not** build a custom booking engine or Monday API for MVP.
-- `/contact` mailto form is for **general inquiries only**.
+- General questions: `mailto:contact@uptowngaming.net` (footer and page “Email us” buttons).
 
 ### Marketing funnel — Linktree (primary)
 
@@ -78,7 +78,7 @@ The website complements Linktree; it does not replace it. The Monday URL on Link
 
 | Tool | URL | Site treatment |
 |------|-----|----------------|
-| Discord | `https://discord.com/invite/UGNY` | Footer, homepage + `/contact` community grid |
+| Discord | `https://discord.com/invite/UGNY` | Footer |
 | start.gg hub | `https://www.start.gg/hub/up-the-block-ugny` | Footer, community grid, CTA on `/events` |
 | JoinIt membership | `https://app.joinit.com/o/ugny` | Footer, `MembershipSection` on homepage |
 | Food & drink menu | [Google Drive PDF](https://drive.google.com/file/d/1lFUt1mGZbxm7V4elYJvoR0-oLFgNnLhO/view) | Footer + community grid — **v1: Drive link** |
@@ -155,15 +155,15 @@ Exported helpers: `bookingFormUrl`, `socialLinks`, `communityLinks`.
 
 | Change | Files |
 |--------|--------|
-| Booking redirect | `app/book/layout.tsx`, `app/book/page.tsx` |
+| Booking / nav CTA | `config/nav.ts`, `components/layout/NavLink.tsx`, `bookingFormUrl` |
 | Config | `config/site.ts` |
 | External buttons | `components/ui/Button.tsx`, `lib/links.ts` |
-| Footer / contact | `components/layout/Footer.tsx`, `app/contact/page.tsx` |
+| Footer | `components/layout/Footer.tsx` |
 | SMS / GoFundMe blocks | `components/marketing/SmsProgramBlock.tsx`, `SupportFundraiserBlock.tsx` |
 | Events start.gg | `app/events/page.tsx` |
 | General mailto | `components/forms/ContactForm.tsx` |
 
-**Note:** `ROUTES_AND_PAGE_SPECS.md` describes `/book` as a content page; implementation uses a **redirect route** to Monday.
+**Note:** Older docs may reference `/book` and `/contact` routes; the site links directly to Monday and mailto instead.
 
 ---
 

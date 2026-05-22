@@ -1,17 +1,13 @@
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
+import { Panel } from "@/components/ui/Panel";
 import { cn } from "@/lib/utils";
 
 type SmsProgramBlockProps = {
   className?: string;
-  /** When false, omit inner h2 (parent section provides heading). */
   showHeading?: boolean;
 };
 
-/**
- * Toast SMS program promo — text-to-join CTA with required legal disclosures.
- * See docs/INTEGRATIONS.md.
- */
 export function SmsProgramBlock({
   className,
   showHeading = true,
@@ -19,12 +15,7 @@ export function SmsProgramBlock({
   const { sms } = siteConfig;
 
   return (
-    <div
-      className={cn(
-        "rounded-lg border border-(--foreground)/15 bg-(--surface-dark) p-6",
-        className
-      )}
-    >
+    <Panel className={cn(className)}>
       {showHeading && (
         <>
           <h2 className="text-lg font-semibold text-(--foreground)">
@@ -39,11 +30,11 @@ export function SmsProgramBlock({
 
       <div
         className={cn(
-          "flex flex-col gap-6 sm:flex-row sm:items-start",
+          "grid gap-8 sm:grid-cols-[auto_1fr] sm:items-center",
           showHeading ? "mt-6" : "mt-0"
         )}
       >
-        <div className="shrink-0">
+        <div className="mx-auto shrink-0 sm:mx-0">
           <Image
             src={sms.qrImagePath}
             alt="QR code to join Uptown Gaming SMS program"
@@ -52,7 +43,7 @@ export function SmsProgramBlock({
             className="rounded-md bg-white p-1"
           />
         </div>
-        <div>
+        <div className="text-center sm:text-left">
           <p className="font-medium text-(--foreground)">Scan to join</p>
           <p className="mt-2 text-(--foreground)/80">
             or text{" "}
@@ -70,7 +61,7 @@ export function SmsProgramBlock({
         </div>
       </div>
 
-      <p className="mt-6 text-xs leading-relaxed text-(--foreground)/60">
+      <p className="mt-8 text-xs leading-relaxed text-(--foreground)/60">
         By signing up, you agree to receive automated and personalized marketing
         texts. Consent is not a condition of purchase. Frequency varies; message
         and data rates may apply. See{" "}
@@ -93,6 +84,6 @@ export function SmsProgramBlock({
         </a>
         . Text STOP to cancel or HELP for more information.
       </p>
-    </div>
+    </Panel>
   );
 }

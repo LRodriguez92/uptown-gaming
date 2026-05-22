@@ -34,7 +34,7 @@ function buildMailtoUrl(form: HTMLFormElement): string {
 }
 
 /**
- * General contact inquiry form (not official booking — use /book → Monday).
+ * General contact inquiry form (not official booking — use bookingFormUrl).
  * Opens the user's mail client with a prefilled message to contact@uptowngaming.net.
  */
 export function ContactForm({ className }: ContactFormProps) {

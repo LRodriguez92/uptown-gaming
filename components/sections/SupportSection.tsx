@@ -1,11 +1,10 @@
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/Container";
+import { Panel } from "@/components/ui/Panel";
+import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 
-/**
- * GoFundMe support campaign — subdued, time-bound via siteConfig.fundraising.
- */
 export function SupportSection() {
   const { fundraising, community } = siteConfig;
 
@@ -14,16 +13,16 @@ export function SupportSection() {
   }
 
   return (
-    <section aria-label="Support us">
-      <Container className="py-12 md:py-16">
-        <div className="rounded-lg border border-(--foreground)/15 bg-(--surface-dark) p-6 md:p-8 md:flex md:items-center md:justify-between md:gap-8">
+    <Section aria-label="Support us" tone="elevated">
+      <Container>
+        <Panel className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-10">
           <SectionHeading
             eyebrow="Community support"
             title="Support us"
             support={fundraising.supportBlurb}
-            className="md:max-w-2xl space-y-2!"
+            className="md:max-w-2xl"
           />
-          <div className="mt-6 shrink-0 md:mt-0">
+          <div className="shrink-0">
             <Button
               as="link"
               href={community.gofundmeUrl}
@@ -33,8 +32,8 @@ export function SupportSection() {
               {community.gofundmeTitle}
             </Button>
           </div>
-        </div>
+        </Panel>
       </Container>
-    </section>
+    </Section>
   );
 }

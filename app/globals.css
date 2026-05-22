@@ -68,3 +68,18 @@ body {
     display: none;
   }
 }
+
+/* Consistent spacing after section headings */
+.section-stack {
+  margin-top: 2rem;
+}
+
+.section-stack-lg {
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-stack-lg {
+    margin-top: 3rem;
+  }
+}

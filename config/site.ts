@@ -75,21 +75,37 @@ export type SiteConfig = typeof siteConfig;
 
 export const bookingFormUrl = siteConfig.booking.mondayFormUrl;
 
-/** Footer / contact social list with display labels. */
+/** Footer social list — platform drives icon; label for accessibility. */
 export const socialLinks = [
-  { label: "Instagram", href: siteConfig.social.instagram },
-  { label: "TikTok", href: siteConfig.social.tiktok },
-  { label: "X", href: siteConfig.social.x },
-  { label: "Facebook", href: siteConfig.social.facebook },
-  { label: "Twitch", href: siteConfig.social.twitch },
+  {
+    platform: "instagram" as const,
+    label: "Instagram",
+    href: siteConfig.social.instagram,
+  },
+  {
+    platform: "tiktok" as const,
+    label: "TikTok",
+    href: siteConfig.social.tiktok,
+  },
+  { platform: "x" as const, label: "X", href: siteConfig.social.x },
+  {
+    platform: "facebook" as const,
+    label: "Facebook",
+    href: siteConfig.social.facebook,
+  },
+  {
+    platform: "twitch" as const,
+    label: "Twitch",
+    href: siteConfig.social.twitch,
+  },
+  {
+    platform: "discord" as const,
+    label: "Discord",
+    href: siteConfig.community.discord,
+  },
 ] as const;
 
 export const communityLinks = [
-  {
-    label: "Discord",
-    href: siteConfig.community.discord,
-    description: "Chat with the community, get event updates, and member channels.",
-  },
   {
     label: "start.gg hub",
     href: siteConfig.community.startGgHub,
@@ -99,11 +115,6 @@ export const communityLinks = [
     label: "Membership",
     href: siteConfig.community.membershipUrl,
     description: "Join on JoinIt for member perks, discounts, and exclusive access.",
-  },
-  {
-    label: "Food & drink menu",
-    href: siteConfig.community.menuUrl,
-    description: "View our current food and drink offerings (PDF).",
   },
   {
     label: "All links (Linktree)",
