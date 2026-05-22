@@ -48,7 +48,7 @@ export default function EventsPage() {
                 Book the Space
               </Button>
               <Button as="link" href="/contact" variant="ghost">
-                Contact us
+                Contact Us
               </Button>
             </div>
           </div>

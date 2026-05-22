@@ -11,6 +11,10 @@ export function HeroSection() {
   return (
     <section aria-label="Hero" className="min-h-[calc(100vh-4rem)]">
       <div className="relative flex min-h-[calc(100vh-4rem)] items-center overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0 bg-(--background)/60"
+          aria-hidden="true"
+        />
         <video
           className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
           autoPlay

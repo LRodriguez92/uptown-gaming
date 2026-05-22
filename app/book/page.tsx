@@ -1,7 +1,9 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { createPageMetadata } from "@/lib/metadata";
+import { venueFeatures } from "@/content/venue-features";
 
 export const metadata = createPageMetadata({
   title: "Book the Space",
@@ -42,12 +44,26 @@ export default function BookPage() {
             title="What You Get"
             support="Flexible layout, gaming-ready setup, and a central location—everything you need to run a great event."
           />
+          <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {venueFeatures.map((feature) => (
+              <li key={feature.slug}>
+                <Card className="h-full">
+                  <h3 className="text-lg font-semibold text-(--foreground)">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-2 text-(--foreground)/80">
+                    {feature.shortDescription}
+                  </p>
+                </Card>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 
       <section aria-label="Booking CTA">
         <Container className="pb-12 md:pb-16">
-          <div className="rounded-lg border border-(--foreground)/10 bg-(--foreground)/5 p-8 text-center">
+          <div className="rounded-lg border border-(--foreground)/15 bg-(--surface-dark) p-8 text-center">
             <h2 className="text-xl font-semibold text-(--foreground)">
               Ready to book?
             </h2>

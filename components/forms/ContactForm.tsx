@@ -1,3 +1,5 @@
+"use client";
+
 import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -6,19 +8,44 @@ type ContactFormProps = {
   className?: string;
 };
 
+function buildMailtoUrl(form: HTMLFormElement): string {
+  const data = new FormData(form);
+  const name = String(data.get("name") ?? "").trim();
+  const email = String(data.get("email") ?? "").trim();
+  const eventType = String(data.get("eventType") ?? "").trim();
+  const preferredDate = String(data.get("preferredDate") ?? "").trim();
+  const message = String(data.get("message") ?? "").trim();
+
+  const lines = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    eventType ? `Event type: ${eventType}` : null,
+    preferredDate ? `Preferred date/timeframe: ${preferredDate}` : null,
+    "",
+    message,
+  ].filter((line): line is string => line !== null);
+
+  const params = new URLSearchParams({
+    subject: "Uptown Gaming inquiry",
+    body: lines.join("\n"),
+  });
+
+  return `mailto:${siteConfig.contact.bookingEmail}?${params.toString()}`;
+}
+
 /**
  * Contact / booking inquiry form.
  * COMPONENT_SPEC: BookingInquiryForm suggested fields; kept lightweight and email-based for MVP.
- * No custom booking engine or backend; submits via mailto to the booking email.
+ * No custom booking engine or backend; opens the user's mail client with a prefilled inquiry.
  */
 export function ContactForm({ className }: ContactFormProps) {
-  const action = `mailto:${siteConfig.contact.bookingEmail}`;
-
   return (
     <form
-      action={action}
-      method="POST"
       className={cn("space-y-4", className)}
+      onSubmit={(e) => {
+        e.preventDefault();
+        window.location.href = buildMailtoUrl(e.currentTarget);
+      }}
     >
       <div className="grid gap-4 md:grid-cols-2">
         <div>
@@ -100,16 +127,13 @@ export function ContactForm({ className }: ContactFormProps) {
           className="mt-1 w-full rounded-md border border-(--foreground)/20 bg-(--surface-light) px-3 py-2 text-(--foreground) shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2"
         />
         <p className="mt-1 text-xs text-(--foreground)/70">
-          Share any details that help us understand your event or question.
+          Share any details that help us understand your event or question. Submitting opens your email app with this inquiry prefilled.
         </p>
       </div>
 
       <div className="pt-2">
-        <Button type="submit">
-          Send inquiry
-        </Button>
+        <Button type="submit">Send inquiry</Button>
       </div>
     </form>
   );
 }
-

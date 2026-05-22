@@ -81,14 +81,14 @@ The UI should not feel:
 Use semantic tokens in implementation. Do not scatter raw hex values throughout the codebase. :contentReference[oaicite:16]{index=16} 
 
 ### Core Brand Colors
-- Brand green: `#188933`
+- Brand green: `#0B7155`
 - Brand gold: `#F2AB00`
 - Dark neutral: `#191919`
 - Light neutral: `#F2F2F2`
 - Black: `#000000` 
 
 ### Recommended Semantic Tokens
-- `brand-primary` = `#188933`
+- `brand-primary` = `#0B7155`
 - `brand-accent` = `#F2AB00`
 - `surface-dark` = `#191919`
 - `surface-light` = `#F2F2F2`

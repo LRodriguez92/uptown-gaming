@@ -50,7 +50,12 @@ export function SectionHeading({
         {title}
       </Tag>
       {support && (
-        <p className="max-w-2xl text-(--foreground)/80 md:text-lg">
+        <p
+          className={cn(
+            "max-w-2xl text-(--foreground)/80 md:text-lg",
+            align === "center" && "mx-auto"
+          )}
+        >
           {support}
         </p>
       )}

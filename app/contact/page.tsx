@@ -61,7 +61,7 @@ export default function ContactPage() {
           <p className="mt-2 text-(--foreground)/80">
             Use the form below for booking inquiries, event questions, or general outreach.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 max-w-2xl">
             <ContactForm />
           </div>
         </Container>

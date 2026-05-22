@@ -148,7 +148,7 @@ Typography should feel strong, clean, and readable.
 Use semantic brand tokens in code rather than scattering raw color values everywhere.
 
 ### Approved Core Colors
-- Brand green: `#188933`
+- Brand green: `#0B7155`
 - Brand gold/accent: `#F2AB00`
 - Dark neutral: `#191919`
 - Light neutral: `#F2F2F2`

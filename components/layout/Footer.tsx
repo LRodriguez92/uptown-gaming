@@ -12,7 +12,7 @@ import { Container } from "@/components/ui/Container";
  */
 export function Footer() {
   return (
-    <footer className="border-t border-(--foreground)/10 bg-(--background)">
+    <footer className="border-t border-(--foreground)/15 bg-(--surface-dark)">
       <Container className="py-8">
         <div className="flex flex-wrap gap-8">
           <div>
@@ -35,7 +35,7 @@ export function Footer() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-(--foreground)/80 hover:underline"
+                    className="text-sm text-(--foreground)/80 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2 rounded-sm"
                   >
                     {label}
                   </Link>
@@ -52,7 +52,7 @@ export function Footer() {
                 <li key={href}>
                   <Link
                     href={href}
-                    className="text-sm text-(--foreground)/80 hover:underline"
+                    className="text-sm text-(--foreground)/80 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2 rounded-sm"
                   >
                     {label}
                   </Link>
@@ -70,7 +70,7 @@ export function Footer() {
                   href={siteConfig.social.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-(--foreground)/80 hover:underline"
+                  className="rounded-sm text-sm text-(--foreground)/80 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2"
                 >
                   Instagram
                 </a>

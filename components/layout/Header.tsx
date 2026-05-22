@@ -35,7 +35,7 @@ export function Header() {
             <Link
               key={href}
               href={href}
-              className="text-(--foreground) hover:underline"
+              className="rounded-sm text-(--foreground) hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2"
             >
               {label}
             </Link>

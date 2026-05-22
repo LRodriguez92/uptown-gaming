@@ -161,7 +161,7 @@ The visual system should follow:
 - QT Palatine: primary site type for headings, body text, buttons, nav, and forms
 
 ### Brand Colors
-- Green: `#188933`
+- Green: `#0B7155`
 - Gold: `#F2AB00`
 - Dark neutral: `#191919`
 - Light neutral: `#F2F2F2`
