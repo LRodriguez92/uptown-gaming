@@ -42,8 +42,6 @@ export const siteConfig = {
     /** start.gg hub + API (see STARTGG_* env vars). */
     startGg: {
       hubSlug: "up-the-block-ugny",
-      /** Fallback when owner list has no upcoming UTB (venue region on start.gg). */
-      regionState: "NY",
       /** Optional: pin one tournament (slug only, e.g. up-the-block-56-11-18-11-24). */
       tournamentSlug: process.env.STARTGG_TOURNAMENT_SLUG,
     },

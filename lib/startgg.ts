@@ -182,26 +182,6 @@ const TOURNAMENTS_BY_OWNER_QUERY = `
   }
 `;
 
-const TOURNAMENTS_BY_REGION_QUERY = `
-  query TournamentsByRegion($perPage: Int!, $addrState: String!) {
-    tournaments(query: {
-      perPage: $perPage
-      page: 1
-      sortBy: "startAt desc"
-      filter: { addrState: $addrState }
-    }) {
-      nodes {
-        id
-        name
-        slug
-        startAt
-        endAt
-        state
-      }
-    }
-  }
-`;
-
 const USER_ID_BY_SLUG_QUERY = `
   query UserIdBySlug($slug: String!) {
     user(slug: $slug) {
@@ -338,12 +318,6 @@ async function fetchTournamentBySlug(
   return mapTournament(minimal?.tournament ?? null);
 }
 
-function isUpTheBlockSeries(node: TournamentNode): boolean {
-  const slug = node.slug.toLowerCase();
-  const name = node.name.toLowerCase();
-  return slug.includes("up-the-block") || name.includes("up the block");
-}
-
 /** Active, in progress, or scheduled — not completed. */
 function isUpcomingTournament(node: TournamentNode): boolean {
   const now = Math.floor(Date.now() / 1000);
@@ -400,10 +374,10 @@ function dedupeTournaments(nodes: TournamentNode[]): TournamentNode[] {
   });
 }
 
-function pickUpcomingHubTournaments(nodes: TournamentNode[]): TournamentNode[] {
+function pickUpcomingOwnerTournaments(nodes: TournamentNode[]): TournamentNode[] {
   const now = Math.floor(Date.now() / 1000);
 
-  return dedupeTournaments(nodes.filter(isUpTheBlockSeries))
+  return dedupeTournaments(nodes)
     .filter(isUpcomingTournament)
     .sort((a, b) => {
       const aLive = isLiveTournament(a, now);
@@ -423,26 +397,15 @@ async function fetchTournamentsForOwner(
   return data?.tournaments?.nodes ?? [];
 }
 
-async function fetchTournamentsByRegion(
-  addrState: string
-): Promise<TournamentNode[]> {
-  const data = await startGgQuery<TournamentsByOwnerData>(
-    TOURNAMENTS_BY_REGION_QUERY,
-    { addrState, perPage: 50 }
-  );
-  return data?.tournaments?.nodes ?? [];
-}
-
-async function listUpcomingHubTournaments(): Promise<TournamentNode[]> {
+async function listUpcomingOwnerTournaments(): Promise<TournamentNode[]> {
   const ownerIds = await resolveOwnerIds();
-  const region = siteConfig.community.startGg.regionState;
+  if (ownerIds.length === 0) return [];
 
-  const [ownerBatches, regionNodes] = await Promise.all([
-    Promise.all(ownerIds.map((ownerId) => fetchTournamentsForOwner(ownerId))),
-    region ? fetchTournamentsByRegion(region) : Promise.resolve([]),
-  ]);
+  const ownerBatches = await Promise.all(
+    ownerIds.map((ownerId) => fetchTournamentsForOwner(ownerId))
+  );
 
-  return pickUpcomingHubTournaments([...ownerBatches.flat(), ...regionNodes]);
+  return pickUpcomingOwnerTournaments(ownerBatches.flat());
 }
 
 async function loadUpcomingTournamentsWithEvents(): Promise<
@@ -455,7 +418,7 @@ async function loadUpcomingTournamentsWithEvents(): Promise<
     return one ? [one] : [];
   }
 
-  const nodes = await listUpcomingHubTournaments();
+  const nodes = await listUpcomingOwnerTournaments();
   if (nodes.length === 0) return [];
 
   const tournaments: StartGgTournamentWithEvents[] = [];
@@ -469,7 +432,7 @@ async function loadUpcomingTournamentsWithEvents(): Promise<
 }
 
 /**
- * Upcoming Up The Block tournaments with all bracket events and images.
+ * Upcoming tournaments for STARTGG_OWNER_ID(S) with all bracket events and images.
  * Cached per request; retries API calls; always fetches fresh (no-store).
  */
 export const getUpcomingTournamentsWithEvents = cache(

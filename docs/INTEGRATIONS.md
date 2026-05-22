@@ -27,7 +27,7 @@ Use this file to:
 | Menu | `/menu` (`public/menu/*.png`, sorted by filename) | Main nav **Menu** link (same tab) |
 | GoFundMe | Subdued support link | `SupportSection` on homepage + footer; toggle `fundraising.showSupportLink` |
 | SMS program | Text JOIN + legal copy + QR image | `SmsProgramSection` on homepage, `siteConfig.sms` |
-| Events / venue content | Local TS + start.gg API | `/events` — current **Up The Block** tournament + bracket events; `STARTGG_*` env; 5m revalidate |
+| Events / venue content | Local TS + start.gg API | `/events` — upcoming tournaments for `STARTGG_OWNER_ID(S)` + bracket events; `STARTGG_*` env |
 
 ---
 
