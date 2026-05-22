@@ -34,3 +34,10 @@ export type VenueFeature = {
   featured?: boolean;
   displayOrder?: number;
 };
+
+export type AboutContent = {
+  story: string[];
+  mission: string;
+  values: string;
+  team: string;
+};
