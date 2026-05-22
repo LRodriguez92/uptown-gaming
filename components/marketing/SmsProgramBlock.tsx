@@ -4,13 +4,18 @@ import { cn } from "@/lib/utils";
 
 type SmsProgramBlockProps = {
   className?: string;
+  /** When false, omit inner h2 (parent section provides heading). */
+  showHeading?: boolean;
 };
 
 /**
  * Toast SMS program promo — text-to-join CTA with required legal disclosures.
  * See docs/INTEGRATIONS.md.
  */
-export function SmsProgramBlock({ className }: SmsProgramBlockProps) {
+export function SmsProgramBlock({
+  className,
+  showHeading = true,
+}: SmsProgramBlockProps) {
   const { sms } = siteConfig;
 
   return (
@@ -20,15 +25,24 @@ export function SmsProgramBlock({ className }: SmsProgramBlockProps) {
         className
       )}
     >
-      <h2 className="text-lg font-semibold text-(--foreground)">
-        Get 10% off your next order
-      </h2>
-      <p className="mt-2 text-(--foreground)/80">
-        Join our SMS program for secret discounts, menu specials, and restaurant
-        news.
-      </p>
+      {showHeading && (
+        <>
+          <h2 className="text-lg font-semibold text-(--foreground)">
+            Get 10% off your next order
+          </h2>
+          <p className="mt-2 text-(--foreground)/80">
+            Join our SMS program for secret discounts, menu specials, and
+            restaurant news.
+          </p>
+        </>
+      )}
 
-      <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-start">
+      <div
+        className={cn(
+          "flex flex-col gap-6 sm:flex-row sm:items-start",
+          showHeading ? "mt-6" : "mt-0"
+        )}
+      >
         <div className="shrink-0">
           <Image
             src={sms.flyerImagePath}

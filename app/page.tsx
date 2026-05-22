@@ -3,12 +3,15 @@ import { BrandIntroSection } from "@/components/sections/BrandIntroSection";
 import { EventsPreviewSection } from "@/components/sections/EventsPreviewSection";
 import { VenueFeaturesSection } from "@/components/sections/VenueFeaturesSection";
 import { BookingCTASection } from "@/components/sections/BookingCTASection";
+import { CommunitySection } from "@/components/sections/CommunitySection";
+import { MembershipSection } from "@/components/sections/MembershipSection";
+import { SupportSection } from "@/components/sections/SupportSection";
+import { SmsProgramSection } from "@/components/sections/SmsProgramSection";
 import { SocialProofSection } from "@/components/sections/SocialProofSection";
 
 /**
  * Home page: section order per ROUTES_AND_PAGE_SPECS and IA.
- * 1. Hero 2. Brand intro 3. Events preview 4. Venue features 5. Booking CTA 6. Social proof.
- * Footer is in root layout. Step 5 scaffold; Step 6 will add section content.
+ * Footer is in root layout.
  */
 export default function Home() {
   return (
@@ -18,6 +21,10 @@ export default function Home() {
       <EventsPreviewSection />
       <VenueFeaturesSection />
       <BookingCTASection />
+      <CommunitySection />
+      <MembershipSection />
+      <SupportSection />
+      <SmsProgramSection />
       <SocialProofSection />
     </>
   );

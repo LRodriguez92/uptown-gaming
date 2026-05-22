@@ -85,9 +85,29 @@ export const socialLinks = [
 ] as const;
 
 export const communityLinks = [
-  { label: "Discord", href: siteConfig.community.discord },
-  { label: "start.gg hub", href: siteConfig.community.startGgHub },
-  { label: "Membership", href: siteConfig.community.membershipUrl },
-  { label: "Food & drink menu", href: siteConfig.community.menuUrl },
-  { label: "All links (Linktree)", href: siteConfig.funnel.linktreeUrl },
+  {
+    label: "Discord",
+    href: siteConfig.community.discord,
+    description: "Chat with the community, get event updates, and member channels.",
+  },
+  {
+    label: "start.gg hub",
+    href: siteConfig.community.startGgHub,
+    description: "Find tournaments and events hosted by Uptown Gaming.",
+  },
+  {
+    label: "Membership",
+    href: siteConfig.community.membershipUrl,
+    description: "Join on JoinIt for member perks, discounts, and exclusive access.",
+  },
+  {
+    label: "Food & drink menu",
+    href: siteConfig.community.menuUrl,
+    description: "View our current food and drink offerings (PDF).",
+  },
+  {
+    label: "All links (Linktree)",
+    href: siteConfig.funnel.linktreeUrl,
+    description: "One link for socials, booking, and more from our bio and QR codes.",
+  },
 ] as const;

@@ -19,13 +19,13 @@ Use this file to:
 | Capability | Status | Where |
 |------------|--------|--------|
 | Domain / metadata | `https://www.uptowngaming.net` | `siteConfig.baseUrl`, `NEXT_PUBLIC_SITE_URL` |
-| General contact | `contact@uptowngaming.net` | `siteConfig.contact.email`, `/contact`, `ContactForm` mailto |
+| General contact | `contact@uptowngaming.net` | `siteConfig.contact.email`, `/contact` mailto link |
 | Booking | Monday.com public form | `/book` → server `redirect()` → `siteConfig.booking.mondayFormUrl` (same tab) |
 | Linktree | Primary off-site funnel | `siteConfig.funnel.linktreeUrl` — footer + contact |
 | Social | Instagram, TikTok, X, Facebook, Twitch | `siteConfig.social`, footer, contact |
 | Community | Discord, start.gg, JoinIt, menu (Drive) | `siteConfig.community`, footer, contact |
-| GoFundMe | Subdued support link | `siteConfig.community.gofundmeUrl`, footer + contact; toggle `fundraising.showSupportLink` |
-| SMS program | Text JOIN + legal copy + flyer QR | `SmsProgramBlock` on `/contact`, `siteConfig.sms` |
+| GoFundMe | Subdued support link | `SupportSection` on homepage + footer; toggle `fundraising.showSupportLink` |
+| SMS program | Text JOIN + legal copy + flyer QR | `SmsProgramSection` on homepage, `siteConfig.sms` |
 | Events / venue content | Local TS | `content/events.ts`, `content/venue-features.ts` |
 | Menu | Google Drive PDF (v1) | `siteConfig.community.menuUrl` — new tab; dynamic updates without redeploy |
 
@@ -78,13 +78,13 @@ The website complements Linktree; it does not replace it. The Monday URL on Link
 
 | Tool | URL | Site treatment |
 |------|-----|----------------|
-| Discord | `https://discord.com/invite/UGNY` | Footer + contact |
-| start.gg hub | `https://www.start.gg/hub/up-the-block-ugny` | Footer, contact, CTA on `/events` |
-| JoinIt membership | `https://app.joinit.com/o/ugny` | Footer, contact (benefits listed) |
-| Food & drink menu | [Google Drive PDF](https://drive.google.com/file/d/1lFUt1mGZbxm7V4elYJvoR0-oLFgNnLhO/view) | Footer + contact — **v1: Drive link** (updates without redeploy) |
-| GoFundMe | [Help Uptown Gaming Rebuild](https://www.gofundme.com/f/help-uptown-gaming-reopen) | Footer + contact; subdued copy; reopened 2/6/26, fundraising through Feb 2026 |
+| Discord | `https://discord.com/invite/UGNY` | Footer, homepage + `/contact` community grid |
+| start.gg hub | `https://www.start.gg/hub/up-the-block-ugny` | Footer, community grid, CTA on `/events` |
+| JoinIt membership | `https://app.joinit.com/o/ugny` | Footer, `MembershipSection` on homepage |
+| Food & drink menu | [Google Drive PDF](https://drive.google.com/file/d/1lFUt1mGZbxm7V4elYJvoR0-oLFgNnLhO/view) | Footer + community grid — **v1: Drive link** |
+| GoFundMe | [Help Uptown Gaming Rebuild](https://www.gofundme.com/f/help-uptown-gaming-reopen) | Homepage `SupportSection` + footer; reopened 2/6/26, fundraising through Feb 2026 |
 
-**Membership benefits** (JoinIt, $35/month): documented in `siteConfig.membership.benefits` and shown on `/contact`.
+**Membership benefits** (JoinIt, $35/month): `siteConfig.membership.benefits`, homepage `MembershipSection`.
 
 ### SMS program (Toast)
 
