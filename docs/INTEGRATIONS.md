@@ -24,7 +24,7 @@ Use this file to:
 | Linktree | Primary off-site funnel | `siteConfig.funnel.linktreeUrl` — footer community |
 | Social | Instagram, TikTok, X, Facebook, Twitch | `siteConfig.social`, footer |
 | Community | Discord, start.gg, JoinIt | `siteConfig.community`, footer |
-| Menu | Google Drive PDF | Main nav **Menu** link (same tab) |
+| Menu | `/menu` (`public/menu/*.png`, sorted by filename) | Main nav **Menu** link (same tab) |
 | GoFundMe | Subdued support link | `SupportSection` on homepage + footer; toggle `fundraising.showSupportLink` |
 | SMS program | Text JOIN + legal copy + QR image | `SmsProgramSection` on homepage, `siteConfig.sms` |
 | Events / venue content | Local TS | `content/events.ts`, `content/venue-features.ts` |
@@ -81,7 +81,7 @@ The website complements Linktree; it does not replace it. The Monday URL on Link
 | Discord | `https://discord.com/invite/UGNY` | Footer |
 | start.gg hub | `https://www.start.gg/hub/up-the-block-ugny` | Footer, community grid, CTA on `/events` |
 | JoinIt membership | `https://app.joinit.com/o/ugny` | Footer, `MembershipSection` on homepage |
-| Food & drink menu | [Google Drive PDF](https://drive.google.com/file/d/1lFUt1mGZbxm7V4elYJvoR0-oLFgNnLhO/view) | Footer + community grid — **v1: Drive link** |
+| Food & drink menu | `/menu` → `public/menu/*.png` | Main nav **Menu**; PNGs sorted by name |
 | GoFundMe | [Help Uptown Gaming Rebuild](https://www.gofundme.com/f/help-uptown-gaming-reopen) | Homepage `SupportSection` + footer; reopened 2/6/26, fundraising through Feb 2026 |
 
 **Membership benefits** (JoinIt, $35/month): `siteConfig.membership.benefits`, homepage `MembershipSection`.
@@ -101,8 +101,8 @@ No SMS API on the site — opt-in happens on the user’s phone.
 
 | Approach | When |
 |----------|------|
-| **Google Drive link (current)** | Menu changes often; single source client updates |
-| Host PDF in `public/menu/` | Optional later if menu is stable and on-brand viewing is needed (requires redeploy on change) |
+| **Hosted PNGs (current)** | `public/menu/*.png` — `/menu` lists images sorted by filename; add/rename files and redeploy |
+| Google Drive / client PDF render | Previous approaches |
 
 ---
 

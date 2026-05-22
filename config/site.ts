@@ -37,8 +37,8 @@ export const siteConfig = {
     gofundmeUrl:
       "https://www.gofundme.com/f/help-uptown-gaming-reopen?attribution_id=sl%3A1d657b5b-3c90-42e1-ad91-980c2d26c81b&lang=en_US&ts=1768405588",
     gofundmeTitle: "Help Uptown Gaming Rebuild",
-    menuUrl:
-      "https://drive.google.com/file/d/1lFUt1mGZbxm7V4elYJvoR0-oLFgNnLhO/view",
+    /** On-site menu page (nav + footer). */
+    menuUrl: "/menu",
   },
 
   sms: {
