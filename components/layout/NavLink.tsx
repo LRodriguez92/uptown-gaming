@@ -12,12 +12,13 @@ const mobileNavCtaClassName =
 type NavLinkProps = {
   item: NavItem;
   className?: string;
+  style?: React.CSSProperties;
   onClick?: () => void;
   /** Wider CTA tap target in mobile drawer. */
   mobile?: boolean;
 };
 
-export function NavLink({ item, className, onClick, mobile }: NavLinkProps) {
+export function NavLink({ item, className, style, onClick, mobile }: NavLinkProps) {
   const { href, label, external, cta } = item;
   const useAnchor = isExternalHref(href);
   const openInNewTab = external === true;
@@ -31,6 +32,7 @@ export function NavLink({ item, className, onClick, mobile }: NavLinkProps) {
       <a
         href={href}
         onClick={onClick}
+        style={style}
         className={styles}
         {...(openInNewTab
           ? { target: "_blank", rel: "noopener noreferrer" }
@@ -42,7 +44,7 @@ export function NavLink({ item, className, onClick, mobile }: NavLinkProps) {
   }
 
   return (
-    <Link href={href} onClick={onClick} className={styles}>
+    <Link href={href} onClick={onClick} style={style} className={styles}>
       {label}
     </Link>
   );
