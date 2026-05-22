@@ -3,6 +3,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { createPageMetadata } from "@/lib/metadata";
+import { siteConfig } from "@/config/site";
 import { events } from "@/content/events";
 
 export const metadata = createPageMetadata({
@@ -44,6 +45,14 @@ export default function EventsPage() {
               ))}
             </ul>
             <div className="mt-8 flex flex-wrap gap-4">
+              <Button
+                as="link"
+                href={siteConfig.community.startGgHub}
+                external
+                variant="secondary"
+              >
+                View hub on start.gg
+              </Button>
               <Button as="link" href="/book" variant="secondary">
                 Book the Space
               </Button>

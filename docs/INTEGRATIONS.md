@@ -2,15 +2,15 @@
 
 ## Purpose
 
-This document maps **client-stated tools and workflows** (from discovery materials and stakeholder input) to the **Uptown Gaming website MVP** and later phases.
+This document maps **client-stated tools and workflows** (discovery questionnaire, stakeholder input, and approved URLs) to the **Uptown Gaming website** implementation.
 
 It does **not** override `MVP_SCOPE.md`, `PRODUCT_BRIEF.md`, or `BUILD_SEQUENCE.md`. When those docs conflict with a future integration, surface the conflict and get explicit approval before implementing.
 
 Use this file to:
 
-- know what Uptown already uses off-site
-- decide what the marketing site should link to vs build
-- find extension points in code (`config/site.ts`, booking CTAs, etc.)
+- know what Uptown uses off-site
+- see what the site links to vs builds
+- find the single source of truth in [`config/site.ts`](../config/site.ts)
 
 ---
 
@@ -18,18 +18,20 @@ Use this file to:
 
 | Capability | Status | Where |
 |------------|--------|--------|
-| Instagram | Placeholder URL in config | `config/site.ts` → `social.instagram` |
-| Other socials | Not in config yet | — |
-| General / booking email | Placeholder addresses | `config/site.ts` → `contact` |
-| Booking inquiry | Mailto prefilled form | `components/forms/ContactForm.tsx`, `/contact` |
-| Events / venue | Local structured content | `content/events.ts`, `content/venue-features.ts` |
-| Domain / metadata base URL | Defaults to `https://uptowngaming.com` | `siteConfig.baseUrl`, `NEXT_PUBLIC_SITE_URL` |
-
-**Approved client values below are not fully wired in code yet.** Update `config/site.ts` and CTAs when implementing integration work.
+| Domain / metadata | `https://www.uptowngaming.net` | `siteConfig.baseUrl`, `NEXT_PUBLIC_SITE_URL` |
+| General contact | `contact@uptowngaming.net` | `siteConfig.contact.email`, `/contact`, `ContactForm` mailto |
+| Booking | Monday.com public form | `/book` → server `redirect()` → `siteConfig.booking.mondayFormUrl` (same tab) |
+| Linktree | Primary off-site funnel | `siteConfig.funnel.linktreeUrl` — footer + contact |
+| Social | Instagram, TikTok, X, Facebook, Twitch | `siteConfig.social`, footer, contact |
+| Community | Discord, start.gg, JoinIt, menu (Drive) | `siteConfig.community`, footer, contact |
+| GoFundMe | Subdued support link | `siteConfig.community.gofundmeUrl`, footer + contact; toggle `fundraising.showSupportLink` |
+| SMS program | Text JOIN + legal copy + flyer QR | `SmsProgramBlock` on `/contact`, `siteConfig.sms` |
+| Events / venue content | Local TS | `content/events.ts`, `content/venue-features.ts` |
+| Menu | Google Drive PDF (v1) | `siteConfig.community.menuUrl` — new tab; dynamic updates without redeploy |
 
 ---
 
-## Approved client facts
+## Approved URLs and roles
 
 ### Domain and contact
 
@@ -38,7 +40,29 @@ Use this file to:
 | Primary domain | `https://www.uptowngaming.net/` |
 | General contact email | `contact@uptowngaming.net` |
 
-Set `NEXT_PUBLIC_SITE_URL` to `https://www.uptowngaming.net` (or `https://www.uptowngaming.net/` per hosting convention) in production.
+Production: set `NEXT_PUBLIC_SITE_URL=https://www.uptowngaming.net`.
+
+### Booking — Monday.com (official)
+
+| Item | Value |
+|------|--------|
+| Role | **Official booking path** |
+| Public form | `https://forms.monday.com/forms/bee8248285b6703275f57a30ea76c9bc?r=use1` |
+| On-site route | `/book` redirects to the form above (**same tab**, no iframe) |
+
+- Nav and CTAs labeled “Book the Space” use `/book`; redirect performs handoff.
+- “Start booking inquiry” (homepage booking section) uses `/book`.
+- **Do not** build a custom booking engine or Monday API for MVP.
+- `/contact` mailto form is for **general inquiries only**.
+
+### Marketing funnel — Linktree (primary)
+
+| Item | Value |
+|------|--------|
+| URL | `https://linktr.ee/UGNY` |
+| Role | **Primary funnel** for IG bio, QR, print |
+
+The website complements Linktree; it does not replace it. The Monday URL on Linktree must match `siteConfig.booking.mondayFormUrl`.
 
 ### Social channels
 
@@ -50,156 +74,117 @@ Set `NEXT_PUBLIC_SITE_URL` to `https://www.uptowngaming.net` (or `https://www.up
 | Facebook | `https://www.facebook.com/uptowngamingnyc` |
 | Twitch | `https://www.twitch.tv/ug_nyc` |
 
-`docs/CONTENT_GUIDE.md` and `INFORMATION_ARCHITECTURE.md` emphasize Instagram first; additional channels are approved here for footer/contact when product approves visibility.
+### Community and programs
 
-### Booking — Monday.com (official)
+| Tool | URL | Site treatment |
+|------|-----|----------------|
+| Discord | `https://discord.com/invite/UGNY` | Footer + contact |
+| start.gg hub | `https://www.start.gg/hub/up-the-block-ugny` | Footer, contact, CTA on `/events` |
+| JoinIt membership | `https://app.joinit.com/o/ugny` | Footer, contact (benefits listed) |
+| Food & drink menu | [Google Drive PDF](https://drive.google.com/file/d/1lFUt1mGZbxm7V4elYJvoR0-oLFgNnLhO/view) | Footer + contact — **v1: Drive link** (updates without redeploy) |
+| GoFundMe | [Help Uptown Gaming Rebuild](https://www.gofundme.com/f/help-uptown-gaming-reopen) | Footer + contact; subdued copy; reopened 2/6/26, fundraising through Feb 2026 |
+
+**Membership benefits** (JoinIt, $35/month): documented in `siteConfig.membership.benefits` and shown on `/contact`.
+
+### SMS program (Toast)
 
 | Item | Value |
 |------|--------|
-| Role | **Official booking path** |
-| Public form | `https://forms.monday.com/forms/bee8248285b6703275f57a30ea76c9bc?r=use1` |
+| Offer | 10% off next order — secret discounts, menu specials, news |
+| Join | Text **JOIN** to **1-833-341-1659**; confirm **YES** |
+| Flyer asset | `/public/images/sms-flyer.png` |
+| Legal | Toast terms + privacy linked in `SmsProgramBlock`; STOP/HELP disclosed |
 
-**Implementation guidance (when approved):**
+No SMS API on the site — opt-in happens on the user’s phone.
 
-- Primary CTAs (“Start booking inquiry”, “Book the Space”, `/book` main action) should open this URL (same tab or new tab — confirm with client).
-- Do **not** build a custom booking engine or Monday API integration for MVP unless explicitly approved.
-- The `/contact` mailto form can remain for **general inquiries**; booking should not compete with Monday as the official path.
+### Menu strategy
 
-### Marketing funnel — Linktree (primary)
-
-| Item | Decision |
-|------|----------|
-| Funnel | **Linktree remains the primary funnel** for IG bio, QR codes, and similar entry points |
-| Site role | `uptowngaming.net` supports brand, events, venue story, and organizers; it does not replace Linktree as the main “one link” hub yet |
-
-**Linktree URL:** TBD — add here when provided so site copy and print/QR guidance stay consistent.
-
-**Consistency rule:** The Monday booking form URL on Linktree should match the URL in this doc. Avoid different booking destinations on Linktree vs the website.
-
-**Analytics:** Client cares about Linktree analytics for acquisition; site analytics (Phase 1.1 per `MVP_SCOPE.md`) are separate and optional later.
+| Approach | When |
+|----------|------|
+| **Google Drive link (current)** | Menu changes often; single source client updates |
+| Host PDF in `public/menu/` | Optional later if menu is stable and on-brand viewing is needed (requires redeploy on change) |
 
 ---
 
-## Client-stated tools (discovery summary)
+## UX rules
 
-Source: client discovery questionnaire (`Uptown Gaming.pdf`) plus follow-up answers.
-
-### Active / near-term
-
-| Tool | Client role | Site relationship |
-|------|-------------|-----------------|
-| Monday.com | Booking operations | Official booking — public form link above |
-| Instagram | Discovery, bookings often start here | Link + align with Linktree |
-| Linktree | Primary off-site funnel (IG, QR) | Primary; site complements, does not replace |
-
-### Deferred / future (not MVP marketing site)
-
-| Idea | Notes | MVP doc alignment |
-|------|--------|-------------------|
-| start.gg + joinit.com | Member discount codes | Future project; out of MVP |
-| Key tags / scan for bill | In-venue ops | Out of MVP |
-| Social scheduling hub | Maybe custom later | `MVP_SCOPE.md` — social scheduling platform out of MVP |
-| Twitch → YouTube VOD upload | Content automation | Deferred in `MVP_SCOPE.md` |
-| Live event calendar (e.g. OSNYC-style) | Inspiration only | MVP uses local `Event[]` content |
-| Custom booking engine | — | Explicitly out of MVP |
-
-### Unresolved / skipped
-
-| Item | Status |
-|------|--------|
-| “Modal” (foods, drinks, tournaments, patch notes) | **Skipped** — meaning unclear; do not spec until client clarifies |
+| Topic | Rule |
+|-------|------|
+| Monday / booking | Same tab; no iframe |
+| External community / social / menu / GoFundMe | New tab (`target="_blank"`, `rel="noopener noreferrer"`) |
+| Restaurant-first risk | Menu + SMS live in footer/contact depth, not hero or primary nav |
+| GoFundMe | Subdued; hide via `siteConfig.fundraising.showSupportLink` when campaign ends |
 
 ---
 
-## MVP vs later
+## Discovery PDF vs implementation
 
-| Bucket | What belongs here |
-|--------|-------------------|
-| **Ship now (marketing MVP)** | Brand site, static events/venue content, Instagram (minimum), contact path, clear pointer to **Monday** for booking once wired |
-| **Wire when approved (small change)** | Monday URL on booking CTAs; real domain, email, socials in `siteConfig`; optional Linktree URL in config for reference |
-| **Phase 1.1+** | Site analytics; featured/priority events; partners strip; richer media; easier content editing |
-| **Future platform** | start.gg/joinit, scan-to-pay, social scheduler, Twitch/YouTube automation, CMS/backend if content ops require it |
-
----
-
-## Recommended handoff patterns
-
-### Monday.com
-
-- **Pattern:** External link to the public Monday form (no embed required for MVP unless client requests it).
-- **CTAs:** `/book`, homepage booking section, header/footer “Book” paths → Monday URL.
-- **Contact page:** Explain that booking uses Monday; general questions use `contact@uptowngaming.net` or the contact form.
-
-### Linktree (primary funnel)
-
-- Keep driving traffic to Linktree from IG and QR.
-- Ensure Linktree includes: Monday booking (same URL), Instagram, and other approved links.
-- Website should still expose booking (Monday) for visitors who land on the domain directly (search, word of mouth, organizer-focused flows per product brief).
-
-### Email
-
-- **General:** `contact@uptowngaming.net`
-- **Booking:** Monday form (not a separate booking inbox in this doc unless client adds one)
-
-### Events priority
-
-- MVP: editorial priority via content order or a future `featured` flag on `Event` in `content/events.ts`.
-- No external calendar feed until approved.
+| PDF / client idea | Status |
+|-------------------|--------|
+| Monday.com bookings | **Active** — official path |
+| Linktree + IG + QR | **Active** — Linktree primary funnel |
+| start.gg + joinit.com | **Active** — linked (was “future” in early MVP docs) |
+| GoFundMe reopen campaign | **Active** — time-bound support copy |
+| SMS program | **Active** — contact page |
+| Key tags / scan for bill | Out of MVP |
+| Social scheduling hub | Out of MVP |
+| Twitch → YouTube automation | Out of MVP |
+| Custom booking engine | Out of MVP |
+| “Modal” (menu/patch notes) | **Skipped** — meaning unclear |
 
 ---
 
-## Config and code touchpoints
-
-When implementing integrations, prefer a single source of truth in `config/site.ts` (or a dedicated `config/integrations.ts` if the file grows):
+## Config shape (`config/site.ts`)
 
 ```ts
-// Suggested shape (not yet in repo)
-booking: {
-  mondayFormUrl: "https://forms.monday.com/forms/...",
-},
-social: {
-  instagram: "...",
-  tiktok: "...",
-  // ...
-},
-funnel: {
-  linktreeUrl: "...", // TBD
-},
-contact: {
-  email: "contact@uptowngaming.net",
-},
-baseUrl: "https://www.uptowngaming.net",
+contact.email
+booking.mondayFormUrl
+funnel.linktreeUrl
+social.{instagram,tiktok,x,facebook,twitch}
+community.{discord,startGgHub,membershipUrl,gofundmeUrl,gofundmeTitle,menuUrl}
+sms.{keyword,phoneDisplay,smsUri,confirmKeyword,termsUrl,privacyUrl,flyerImagePath}
+membership.{priceLabel,benefits}
+fundraising.{showSupportLink,supportBlurb}
 ```
 
-| Change | Likely files |
-|--------|----------------|
-| Monday on CTAs | `config/site.ts`, `app/book/page.tsx`, `components/sections/BookingCTASection.tsx`, `Button` links |
-| Social/footer | `config/site.ts`, `components/layout/Footer.tsx`, `app/contact/page.tsx` |
-| Domain / SEO | `config/site.ts`, `lib/metadata.ts`, deploy env |
-| Deprecate mailto for booking | `components/forms/ContactForm.tsx`, copy on `/book` and `/contact` |
+Exported helpers: `bookingFormUrl`, `socialLinks`, `communityLinks`.
+
+---
+
+## Code touchpoints
+
+| Change | Files |
+|--------|--------|
+| Booking redirect | `app/book/layout.tsx`, `app/book/page.tsx` |
+| Config | `config/site.ts` |
+| External buttons | `components/ui/Button.tsx`, `lib/links.ts` |
+| Footer / contact | `components/layout/Footer.tsx`, `app/contact/page.tsx` |
+| SMS / GoFundMe blocks | `components/marketing/SmsProgramBlock.tsx`, `SupportFundraiserBlock.tsx` |
+| Events start.gg | `app/events/page.tsx` |
+| General mailto | `components/forms/ContactForm.tsx` |
+
+**Note:** `ROUTES_AND_PAGE_SPECS.md` describes `/book` as a content page; implementation uses a **redirect route** to Monday.
 
 ---
 
 ## Open items
 
-| Item | Owner / action |
-|------|----------------|
-| Linktree URL | Client → add to this doc and `siteConfig` |
-| Monday link opens new tab vs same tab | Confirm with client |
-| Show all socials in footer vs Instagram-only | Product decision |
-| Replace placeholder emails in code with `contact@uptowngaming.net` | Implementation task |
-| Whether mailto contact form stays alongside Monday | Product decision (general inquiry likely yes) |
+| Item | Action |
+|------|--------|
+| Linktree ↔ Monday parity | Client keeps both URLs aligned on Linktree |
+| GoFundMe after February 2026 | Set `fundraising.showSupportLink` to `false` |
+| Menu on-site PDFs | Only if client wants hosted copies later |
+| Site analytics | Phase 1.1 — optional |
 
 ---
 
 ## Related docs
 
-- `docs/MVP_SCOPE.md` — what is out of MVP
-- `docs/PRODUCT_BRIEF.md` — booking as primary conversion
-- `docs/ROUTES_AND_PAGE_SPECS.md` — `/book`, `/contact` purpose
-- `docs/COMPONENT_SPEC.md` — `BookingInquiryForm`, external workflow handoff
-- `docs/QA_CHECKLIST.md` — booking/contact and external handoff checks
-- `docs/BUILD_SEQUENCE.md` — MVP build order (complete through Step 11)
+- `docs/MVP_SCOPE.md`
+- `docs/PRODUCT_BRIEF.md`
+- `docs/ROUTES_AND_PAGE_SPECS.md`
+- `docs/COMPONENT_SPEC.md`
+- `docs/QA_CHECKLIST.md`
 
 ---
 
@@ -207,4 +192,5 @@ baseUrl: "https://www.uptowngaming.net",
 
 | Date | Change |
 |------|--------|
-| 2026-05-22 | Initial doc: Monday official form URL, Linktree primary funnel, approved domain/email/socials, Modal deferred |
+| 2026-05-22 | Initial doc: Monday, Linktree TBD, domain/socials, Modal deferred |
+| 2026-05-22 | Wired implementation: Linktree, community links, SMS, GoFundMe, Drive menu, `/book` redirect, full as-built table |

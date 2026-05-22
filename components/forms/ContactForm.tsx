@@ -30,13 +30,12 @@ function buildMailtoUrl(form: HTMLFormElement): string {
     body: lines.join("\n"),
   });
 
-  return `mailto:${siteConfig.contact.bookingEmail}?${params.toString()}`;
+  return `mailto:${siteConfig.contact.email}?${params.toString()}`;
 }
 
 /**
- * Contact / booking inquiry form.
- * COMPONENT_SPEC: BookingInquiryForm suggested fields; kept lightweight and email-based for MVP.
- * No custom booking engine or backend; opens the user's mail client with a prefilled inquiry.
+ * General contact inquiry form (not official booking — use /book → Monday).
+ * Opens the user's mail client with a prefilled message to contact@uptowngaming.net.
  */
 export function ContactForm({ className }: ContactFormProps) {
   return (
@@ -127,7 +126,9 @@ export function ContactForm({ className }: ContactFormProps) {
           className="mt-1 w-full rounded-md border border-(--foreground)/20 bg-(--surface-light) px-3 py-2 text-(--foreground) shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-(--brand-accent) focus-visible:ring-offset-2"
         />
         <p className="mt-1 text-xs text-(--foreground)/70">
-          Share any details that help us understand your event or question. Submitting opens your email app with this inquiry prefilled.
+          Share any details that help us understand your question. Submitting
+          opens your email app with this inquiry prefilled. To book the space,
+          use the official booking form on the Book the Space page.
         </p>
       </div>
 

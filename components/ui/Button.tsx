@@ -1,12 +1,10 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { isExternalHref } from "@/lib/links";
 
 type ButtonVariant = "primary" | "secondary" | "ghost";
 
-const variantStyles: Record<
-  ButtonVariant,
-  string
-> = {
+const variantStyles: Record<ButtonVariant, string> = {
   primary:
     "bg-(--brand-primary) text-(--surface-light) hover:opacity-90 focus-visible:opacity-90 border border-transparent",
   secondary:
@@ -19,6 +17,8 @@ type BaseButtonProps = {
   variant?: ButtonVariant;
   className?: string;
   children: React.ReactNode;
+  /** Open external http(s) links in a new tab. Booking / internal paths ignore this. */
+  external?: boolean;
 };
 
 type ButtonAsButton = BaseButtonProps & {
@@ -37,20 +37,39 @@ const baseStyles =
 
 /**
  * Reusable CTA button. Primary for main actions (e.g. Book the Space), secondary for supporting actions.
- * Supports button or link (as="link" href="..."). Accessible, consistent tap targets.
+ * Supports button, internal Link, or external anchor when href is absolute.
  */
 export function Button(props: ButtonProps) {
   const {
     variant = "primary",
     className,
     children,
+    external = false,
     ...rest
   } = props;
 
   const styles = cn(baseStyles, variantStyles[variant], className);
 
   if (props.as === "link") {
-    const { as, href, ...linkRest } = rest as ButtonAsLink;
+    const { as, href, external: openExternal, ...linkRest } = rest as ButtonAsLink;
+    const useAnchor = isExternalHref(href);
+    const openInNewTab = useAnchor && openExternal;
+
+    if (useAnchor) {
+      return (
+        <a
+          href={href}
+          className={styles}
+          {...(openInNewTab
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
+          {...linkRest}
+        >
+          {children}
+        </a>
+      );
+    }
+
     return (
       <Link href={href} className={styles} {...linkRest}>
         {children}
@@ -58,7 +77,13 @@ export function Button(props: ButtonProps) {
     );
   }
 
-  const { as, type = "button", ...buttonRest } = rest as ButtonAsButton & { type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"] };
+  const {
+    as,
+    type = "button",
+    ...buttonRest
+  } = rest as ButtonAsButton & {
+    type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  };
   return (
     <button type={type} className={styles} {...buttonRest}>
       {children}
