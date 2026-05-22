@@ -42,13 +42,6 @@ export default async function EventsPage() {
           <Button as="link" href={bookingFormUrl} variant="secondary">
             Book the Space
           </Button>
-          <Button
-            as="link"
-            href={`mailto:${siteConfig.contact.email}`}
-            variant="ghost"
-          >
-            Email us
-          </Button>
         </div>
       </Container>
     </Section>

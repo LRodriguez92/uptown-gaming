@@ -3,7 +3,7 @@ import { Section } from "@/components/ui/Section";
 import { PageIntro } from "@/components/layout/PageIntro";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { bookingFormUrl, siteConfig } from "@/config/site";
+import { bookingFormUrl } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 import { venueFeatures } from "@/content/venue-features";
 
@@ -56,16 +56,6 @@ export default function VenuePage() {
           <div className="flex flex-wrap justify-center gap-4">
             <Button as="link" href={bookingFormUrl}>
               Book the Space
-            </Button>
-            <Button
-              as="link"
-              href={`mailto:${siteConfig.contact.email}`}
-              variant="secondary"
-            >
-              Email us
-            </Button>
-            <Button as="link" href="/events" variant="ghost">
-              View Events
             </Button>
           </div>
         </Container>

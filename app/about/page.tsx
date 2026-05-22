@@ -4,7 +4,7 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { PageIntro } from "@/components/layout/PageIntro";
 import { Button } from "@/components/ui/Button";
-import { bookingFormUrl, siteConfig } from "@/config/site";
+import { bookingFormUrl } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata = createPageMetadata({
@@ -38,13 +38,6 @@ export default function AboutPage() {
               </Button>
               <Button as="link" href={bookingFormUrl} variant="secondary">
                 Book the Space
-              </Button>
-              <Button
-                as="link"
-                href={`mailto:${siteConfig.contact.email}`}
-                variant="ghost"
-              >
-                Email us
               </Button>
             </div>
           </Panel>
