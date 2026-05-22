@@ -83,6 +83,7 @@ The documentation in `/docs` is the source of truth for product, design, structu
 10. `docs/DESIGN_SYSTEM.md`
 11. `docs/INFORMATION_ARCHITECTURE.md`
 12. `docs/QA_CHECKLIST.md`
+13. `docs/INTEGRATIONS.md` — client tools (Monday, Linktree, socials) vs MVP implementation
 
 ### Cursor Rules
 - `CURSOR_RULES.md`
